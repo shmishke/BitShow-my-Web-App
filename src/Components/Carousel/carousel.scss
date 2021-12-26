@@ -1,0 +1,58 @@
+.carousel-container {
+  width: 90%;
+  height: 60vh;
+  background-color: yellow;
+  margin: 0 auto;
+  display: flex;
+  position: relative;
+  margin-top: 30px;
+
+  .carousel-img {
+    border: 1px solid red;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+
+    img {
+      height: 100%;
+    }
+  }
+
+  .carousel-info {
+    width: 60%;
+    border: 1px solid black;
+
+    button {
+      width: auto;
+      height: auto;
+      font-size: 20px;
+      background-color: greenyellow;
+    }
+  }
+  .btn1 {
+    position: absolute;
+    left: 0%;
+    bottom: calc(50% - 50px);
+    margin-left: -20px;
+
+    button {
+      padding-right: 10px;
+    }
+  }
+  .btn2 {
+    position: absolute;
+    right: 0%;
+    bottom: calc(50% - 50px);
+    margin-right: -20px;
+
+    button {
+      padding-left: 1px;
+    }
+  }
+  button {
+    width: 50px;
+    height: 80px;
+    font-size: 40px;
+    background-color: rgba($color: #000000, $alpha: 0.1);
+  }
+}
