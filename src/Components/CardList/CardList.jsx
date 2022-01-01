@@ -4,58 +4,42 @@ import Pagination from "../Pagination/Pagination";
 import "./cardList.scss";
 
 const CardList = (props) => {
-  const [numberOfCardDisplaying, changeNumberOfCardsDisplaying] = useState(12);
-  const [activePage, changeActivePage] = useState(0);
+  const [search, searchValue] = useState("");
 
-  const results = props.fetchResult.slice(
-    numberOfCardDisplaying * activePage,
-    numberOfCardDisplaying * activePage + numberOfCardDisplaying
-  );
+  const searchResult = props.fetchResult
+    .filter((e) => e.name.toLowerCase().includes(search.toLowerCase()))
+    .map((e) => <Card show={e} />);
 
+  console.log(searchResult);
   return (
     <>
-      <h3>
-        Displaying {numberOfCardDisplaying} out of {props.fetchResult.length}{" "}
-        movies
-      </h3>
-      <button
-        onClick={() => {
-          changeActivePage(0);
-          changeNumberOfCardsDisplaying(60);
-        }}
-      >
-        60
-      </button>
-      <button
-        onClick={() => {
-          changeActivePage(0);
-          changeNumberOfCardsDisplaying(120);
-        }}
-      >
-        120
-      </button>
-      <button
-        onClick={() => {
-          changeActivePage(0);
-          changeNumberOfCardsDisplaying(props.fetchResult.length);
-        }}
-      >
-        All
-      </button>
-      {!(numberOfCardDisplaying >= props.fetchResult.length) && (
-        <Pagination
-          fetchResult={props.fetchResult}
-          numberOfCardDisplaying={numberOfCardDisplaying}
-          activePage={activePage}
-          changeActivePage={changeActivePage}
-        />
-      )}
+      <input type="text" onChange={(e) => searchValue(e.target.value)} />
+      {!search && (
+        <>
+          {!(props.numberOfCardsDisplaying >= props.fetchResult.length) && (
+            <Pagination
+              fetchResult={props.fetchResult}
+              numberOfCardsDisplaying={props.numberOfCardsDisplaying}
+              changeNumberOfCardsDisplaying={
+                props.changeNumberOfCardsDisplaying
+              }
+              activePage={props.activePage}
+              changeActivePage={props.changeActivePage}
+            />
+          )}
 
-      <div className="card-list">
-        {results.map((e) => {
-          return <Card show={e} />;
-        })}
-      </div>
+          <div className="card-list">
+            {props.results.map((e) => {
+              return <Card show={e} />;
+            })}
+          </div>
+        </>
+      )}
+      {search && (
+        <div className="card-list">
+          {searchResult.length >= 1 ? searchResult : <p>No results found.</p>}
+        </div>
+      )}
     </>
   );
 };

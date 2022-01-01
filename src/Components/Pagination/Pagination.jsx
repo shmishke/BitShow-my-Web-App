@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Pagination = (props) => {
   const [button1, changeButton1] = useState(4);
@@ -6,9 +6,9 @@ const Pagination = (props) => {
   const [button3, changeButton3] = useState(6);
 
   const lastActivePage =
-    props.fetchResult.length % props.numberOfCardDisplaying === 0
-      ? Math.floor(props.fetchResult.length / props.numberOfCardDisplaying) - 1
-      : Math.floor(props.fetchResult.length / props.numberOfCardDisplaying);
+    props.fetchResult.length % props.numberOfCardsDisplaying === 0
+      ? Math.floor(props.fetchResult.length / props.numberOfCardsDisplaying) - 1
+      : Math.floor(props.fetchResult.length / props.numberOfCardsDisplaying);
 
   return (
     <div className="pagination">
@@ -22,16 +22,16 @@ const Pagination = (props) => {
           </button>
           <button onClick={() => props.changeActivePage(0)}>1</button>
           <button onClick={() => props.changeActivePage(1)}>2</button>
-          {props.fetchResult.length > 2 * props.numberOfCardDisplaying && (
+          {props.fetchResult.length > 2 * props.numberOfCardsDisplaying && (
             <button onClick={() => props.changeActivePage(2)}>3</button>
           )}
-          {props.fetchResult.length > 3 * props.numberOfCardDisplaying && (
+          {props.fetchResult.length > 3 * props.numberOfCardsDisplaying && (
             <button onClick={() => props.changeActivePage(3)}>4</button>
           )}
-          {props.fetchResult.length > 4 * props.numberOfCardDisplaying && (
+          {props.fetchResult.length > 4 * props.numberOfCardsDisplaying && (
             <button onClick={() => props.changeActivePage(4)}>5</button>
           )}
-          {props.fetchResult.length >= 5 * props.numberOfCardDisplaying && (
+          {props.fetchResult.length >= 5 * props.numberOfCardsDisplaying && (
             <>
               <button>...</button>
               <button
@@ -40,15 +40,15 @@ const Pagination = (props) => {
                 }}
               >
                 {Math.floor(
-                  props.fetchResult.length / props.numberOfCardDisplaying
+                  props.fetchResult.length / props.numberOfCardsDisplaying
                 )}
               </button>
             </>
           )}
           <button
             disabled={
-              props.numberOfCardDisplaying * props.activePage +
-                props.numberOfCardDisplaying >=
+              props.numberOfCardsDisplaying * props.activePage +
+                props.numberOfCardsDisplaying >=
               props.fetchResult.length
             }
             onClick={() => props.changeActivePage(props.activePage + 1)}
@@ -125,7 +125,7 @@ const Pagination = (props) => {
             }}
           >
             {Math.floor(
-              props.fetchResult.length / props.numberOfCardDisplaying
+              props.fetchResult.length / props.numberOfCardsDisplaying
             )}
           </button>
           <button

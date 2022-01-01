@@ -44,7 +44,6 @@ const Carousel = (props) => {
     });
     return top10.slice(0, 10);
   }
-  console.log(bestRatedShows);
   return (
     <>
       <div className="carousel-container">
