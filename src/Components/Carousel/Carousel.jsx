@@ -7,7 +7,14 @@ import { TiStar } from "react-icons/ti";
 const Carousel = (props) => {
   const [carouselShow, changeCarouselShow] = useState(0);
 
-  const bestRatedShows = findTop10Shows(props.shows);
+  const bestRatedShows = [...props.fetchResult]
+    .sort((a, b) => {
+      if (a.rating.average > b.rating.average) return -1;
+      if (a.rating.average < b.rating.average) return 1;
+      return 0;
+    })
+    .slice(0, 10);
+
   const details = bestRatedShows[carouselShow].summary
     .replace("<p>", "")
     .replace("</p>", "")
@@ -16,34 +23,6 @@ const Carousel = (props) => {
     .replace("<i>", "")
     .replace("</i>", "");
 
-  function findTop10Shows(arr) {
-    const top10 = [];
-
-    const top10Ratings = arr
-      .map((e) => {
-        return e.rating.average;
-      })
-      .sort((a, b) => {
-        return a - b;
-      })
-      .reverse()
-      .slice(0, 10)
-      .filter((e, i, arr) => {
-        return i === arr.indexOf(e);
-      });
-
-    const top10Shows = top10Ratings.map((e) => {
-      return arr.filter((el) => {
-        return e === el.rating.average;
-      });
-    });
-    top10Shows.forEach((e) => {
-      for (let i = 0; i < e.length; i++) {
-        top10.push(e[i]);
-      }
-    });
-    return top10.slice(0, 10);
-  }
   return (
     <>
       <div className="carousel-container">

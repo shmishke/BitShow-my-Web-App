@@ -4,18 +4,13 @@ import Carousel from "../../Components/Carousel/Carousel";
 import DisplayNCards from "../../Components/DisplayNCards/DisplayNCards";
 
 const HomePage = (props) => {
-  const results = props.fetchResult.slice(
-    props.numberOfCardsDisplaying * props.activePage,
-    props.numberOfCardsDisplaying * props.activePage +
-      props.numberOfCardsDisplaying
-  );
-
+  console.log(props.fetchResult);
   return (
     <>
       <h2>Top 10 best-rated shows</h2>
       {props.fetchResult && (
         <div className="carousel">
-          <Carousel shows={props.fetchResult} />
+          <Carousel fetchResult={props.fetchResult} />
         </div>
       )}
       <DisplayNCards
@@ -25,13 +20,13 @@ const HomePage = (props) => {
         numberOfCardsDisplaying={props.numberOfCardsDisplaying}
       />
       <h2>What To Watch</h2>
+
       <CardList
         fetchResult={props.fetchResult}
         activePage={props.activePage}
         changeActivePage={props.changeActivePage}
         numberOfCardsDisplaying={props.numberOfCardsDisplaying}
         changeNumberOfCardsDisplaying={props.changeNumberOfCardsDisplaying}
-        results={results}
       />
     </>
   );
