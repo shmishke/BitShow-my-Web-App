@@ -33,7 +33,13 @@ const CardList = (props) => {
 
   const searchResult = sort
     .filter((e) => e.name.toLowerCase().includes(search.toLowerCase()))
-    .map((e) => <Card show={e} />);
+    .map((e) => {
+      return (
+        <Link to={`/show/${e.id}`}>
+          <Card show={e} />;
+        </Link>
+      );
+    });
 
   return (
     <>
