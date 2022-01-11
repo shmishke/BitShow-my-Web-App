@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import "./carousel.scss";
 import { FcLike } from "react-icons/fc";
 import { TiStar } from "react-icons/ti";
+import { FaAngleLeft } from "react-icons/fa";
+import { FaAngleRight } from "react-icons/fa";
 
 const Carousel = (props) => {
   const [carouselShow, changeCarouselShow] = useState(0);
@@ -22,6 +24,15 @@ const Carousel = (props) => {
     .replace("<b>", "")
     .replace("<i>", "")
     .replace("</i>", "");
+
+  console.log(bestRatedShows[carouselShow]);
+  const showId = bestRatedShows[carouselShow].id;
+
+  useEffect(() => {
+    fetch(`https://api.tvmaze.com/shows/${showId}/images`)
+      .then((res) => res.json())
+      .then((res) => console.log(res));
+  }, [showId]);
 
   return (
     <>
@@ -53,7 +64,7 @@ const Carousel = (props) => {
                   if (carouselShow > 0) changeCarouselShow(carouselShow - 1);
                 }}
               >
-                <BsArrowLeft />
+                <FaAngleLeft />
               </button>
             </>
           )}
@@ -66,7 +77,7 @@ const Carousel = (props) => {
                   if (carouselShow < 10) changeCarouselShow(carouselShow + 1);
                 }}
               >
-                <BsArrowRight />
+                <FaAngleRight />
               </button>
             </>
           )}

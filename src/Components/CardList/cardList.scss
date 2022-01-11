@@ -4,3 +4,22 @@
   flex-grow: 0;
   flex-shrink: 0;
 }
+.checkbox-div {
+  width: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  // justify-content: space-between;
+
+  label {
+    width: auto;
+    border: 1px solid red;
+    margin: 0 8px;
+    width: 120px;
+    display: flex;
+    justify-content: space-between;
+
+    input {
+      height: 100%;
+    }
+  }
+}

@@ -1,22 +1,39 @@
+@import "../../variables.module.scss";
+
 .single-page-container {
-  padding: 0 2rem;
+  .top-of-single-page {
+    background-color: $mainColor;
+    height: calc(100vh - 47px - 65px);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
   h2 {
     text-align: center;
-    margin-bottom: 1rem;
+    // padding-bottom: 1rem;
     font-size: 2.5rem;
+    color: $mainColor;
+    background-color: $textColor;
   }
 
   .image-info {
     margin: 0 auto;
+    border-radius: 20px;
     display: flex;
-    background-color: aqua;
+    background-color: $secondaryColor;
+    margin-top: 4%;
+    height: 75%;
     font-size: 1.2rem;
     width: 90%;
+    padding: 15px 10px;
+    color: $textColor;
+
     .image {
       margin: 0 auto;
 
       img {
-        width: 350px;
+        width: 100%;
+        height: 100%;
       }
     }
     .info {
@@ -28,36 +45,136 @@
       .top {
         display: flex;
         width: 100%;
-        border: 1px solid red;
         justify-content: space-between;
 
-        button {
-          background-color: transparent;
-          height: 100%;
-          font-size: 1.5rem;
+        div {
+          width: 100%;
+          border: 1px solid $textColor;
+          border-top: 0;
+          border-left: 0;
+          padding: 0 10px;
+
+          h3 {
+            padding-bottom: 5px;
+          }
+        }
+
+        .add-to-watchlist {
+          width: 100%;
+          display: flex;
+
+          button {
+            width: 80%;
+            background-color: transparent;
+            height: 100%;
+            font-size: 1.5rem;
+            color: $textColor;
+            border: 0;
+          }
+
+          .heart {
+            width: 25%;
+            height: 100%;
+            // border: 1px solid $textColor;
+            // border: 1px solid red;
+            border: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            // border-radius: 50%;
+            margin: 0 auto;
+          }
         }
       }
-      .genres {
+      .images-container {
+        width: 100%;
+        flex-grow: 1;
+        margin: 1rem 0 1.5rem 0;
+
+        button {
+          height: 50px;
+          display: flex;
+          align-items: center;
+          font-size: 1.3rem;
+          border: 1px solid $textColor;
+          color: $textColor;
+          align-self: center;
+          border-radius: 50%;
+          padding: 5px 10px;
+          background-color: transparent;
+        }
+
+        .images {
+          margin-top: 1rem;
+          display: flex;
+          justify-content: space-between;
+          flex-grow: 0;
+
+          .single-image {
+            width: 20%;
+            height: 150px;
+          }
+
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+      .genres-container {
         display: flex;
-        justify-content: space-evenly;
-        h4 {
-          border: 1px solid red;
-          font-size: 2rem;
-          padding: 5px 15px;
-          border-radius: 20px;
+        align-items: center;
+        padding: 10px 0 10px 0;
+        border-top: 1px solid $textColor;
+        border-bottom: 1px solid $textColor;
+
+        h3 {
+          border-right: 1px solid $textColor;
+          padding-right: 10%;
+        }
+        .genres {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          justify-content: space-around;
+
+          h4 {
+            padding: 5px 1rem;
+            border-radius: 20px;
+            border: 1px solid $textColor;
+          }
         }
       }
       .seasons-episodes {
-        border: 1px solid red;
         width: 50%;
         margin: 0 auto;
         display: flex;
         justify-content: space-evenly;
         margin-top: 2rem;
+        // border-bottom: 1px solid $textColor;
       }
       .details {
-        border: 1px solid red;
+        // padding-bottom: 1rem;
+        overflow-y: auto;
+        max-height: 60%;
         padding-bottom: 1rem;
+      }
+      .stars-creator {
+        display: flex;
+
+        .stars,
+        .creator {
+          width: 50%;
+          // border: 1px solid red;
+          padding-top: 0.7rem;
+          // border-right: 1px solid $textColor;
+          text-align: center;
+          height: 100%;
+        }
+        .stars {
+          border-right: 1px solid $textColor;
+        }
       }
     }
   }

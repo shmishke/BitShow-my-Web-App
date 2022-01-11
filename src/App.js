@@ -8,7 +8,7 @@ import SinglePage from "./Pages/SinglePage/SinglePage";
 
 function App() {
   const [fetchResult, getFetchResult] = useState(false);
-  const [numberOfCardsDisplaying, changeNumberOfCardsDisplaying] = useState(30);
+  const [numberOfCardsDisplaying, changeNumberOfCardsDisplaying] = useState(10);
   const [activePage, changeActivePage] = useState(0);
 
   useEffect(() => {

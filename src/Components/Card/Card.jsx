@@ -22,7 +22,7 @@ const Card = (props) => {
         {isHovered && (
           <>
             <div className="rating">
-              <RiStarSLine /> {props.show.rating.average} / 10
+              <RiStarSLine /> {props.show.rating.average}
             </div>
             <button>
               <FcLike /> Add to favorites

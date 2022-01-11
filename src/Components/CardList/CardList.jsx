@@ -1,3 +1,4 @@
+import { MdCheckBox } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useState } from "react/cjs/react.development";
 import Card from "../Card/Card";
@@ -8,6 +9,7 @@ const CardList = (props) => {
   const [search, searchValue] = useState("");
   const originalData = props.fetchResult.map((e) => e);
   const [sort, changeSort] = useState(originalData);
+  const [filteredShows, setFilteredShows] = useState([]);
 
   const results = sort.slice(
     props.numberOfCardsDisplaying * props.activePage,
@@ -41,6 +43,22 @@ const CardList = (props) => {
       );
     });
 
+  const filteredList = [];
+  const filtered = filteredShows.map((e) => {
+    return sort.filter((el) => el.genres.includes(e));
+  });
+
+  const genres = [];
+  props.fetchResult.forEach((e) => genres.push(...e.genres));
+  const Allgenres = genres.filter((e, i) => i === genres.indexOf(e));
+  // .filter((e, i, arr) => e === arr.indexOf(e));
+
+  console.log(genres);
+  console.log(Allgenres);
+
+  console.log(filtered);
+  console.log(filteredShows);
+
   return (
     <>
       <input type="text" onChange={(e) => searchValue(e.target.value)} />
@@ -67,6 +85,11 @@ const CardList = (props) => {
           <option value="h-l"> Ratings (Low to High)</option>
         </select>
       </label>
+      <div className="checkbox-div">
+        {Allgenres.map((e) => {
+          return <></>;
+        })}
+      </div>
       {!search && (
         <>
           {!(props.numberOfCardsDisplaying >= props.fetchResult.length) && (
