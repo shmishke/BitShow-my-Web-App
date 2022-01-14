@@ -12,6 +12,7 @@ import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import OneEpisode from "../../Components/SingleEpisode.jsx/OneEpisode";
+import OnePerson from "../../Components/OnePerson/OnePerson";
 
 const SinglePage = (props) => {
   const [seasons, setSeasons] = useState([]);
@@ -22,7 +23,6 @@ const SinglePage = (props) => {
   const [numOfCast, changeNumOfCast] = useState(8);
   const [genreOneSliceBegin, setGenreOneSliceBegin] = useState(0);
   const [genreOneSliceEnd, setGenreOneSliceEnd] = useState(4);
-  const [characterImageClick, setCharacterImageClick] = useState(false);
 
   const [imageSlice, changeImageSlice] = useState(0);
   const [imageSliceEnd, changeImageSliceEnd] = useState(4);
@@ -95,7 +95,6 @@ const SinglePage = (props) => {
     console.log(all.filter((e, i, arr) => i === arr.indexOf(e)));
     return all.filter((e, i, arr) => i === arr.indexOf(e));
   };
-  // const moreShowsByGenre = showMoreShows(show.genres);
   console.log(cast);
   const moreShows = showMoreShows(show.genres);
 
@@ -123,7 +122,6 @@ const SinglePage = (props) => {
             backgroundSize: "cover",
           }}
         >
-          \
           <div className="image-info">
             <div className="image">
               <img src={show.image.original} alt="#" />
@@ -255,44 +253,9 @@ const SinglePage = (props) => {
             <div className="cast-container">
               <h3 className="title">Cast</h3>
               <div className="cast">
-                {showCast(cast).map((e) => {
-                  return (
-                    <div className="single-person">
-                      {!characterImageClick ? (
-                        <>
-                          {e.person.image != null &&
-                          e.person.image != undefined ? (
-                            <img src={e.person.image.medium} alt="" />
-                          ) : (
-                            <img
-                              src="https://www.neils.org/wp-content/uploads/2016/06/no-image.png"
-                              alt=""
-                            />
-                          )}
-                        </>
-                      ) : (
-                        <>
-                          {e.character.image != null &&
-                          e.character.image != undefined ? (
-                            <img src={e.character.image.medium} alt="" />
-                          ) : (
-                            <img src={e.person.image.medium} alt="" />
-                          )}
-                        </>
-                      )}
-
-                      <div className="single-person-name">
-                        <h3 onClick={() => setCharacterImageClick(false)}>
-                          {e.person.name}
-                        </h3>
-                        <p>as</p>
-                        <h3 onClick={() => setCharacterImageClick(true)}>
-                          {e.character.name}
-                        </h3>
-                      </div>
-                    </div>
-                  );
-                })}
+                {showCast(cast).map((e) => (
+                  <OnePerson e={e} />
+                ))}
               </div>
 
               {cast.length > 8 ? (
