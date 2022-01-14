@@ -1,3 +1,5 @@
+@import "../../variables.module.scss";
+
 .card {
   width: 270px;
   border: 1px solid black;
@@ -21,15 +23,24 @@
   }
 
   button {
-    position: absolute;
-    bottom: 105px;
+    width: 100%;
+    background-color: #0cca4a;
+    height: 50px;
+    text-decoration: none;
+
+    // :hover {
+    //   background-color: #29524a;
+    // }
   }
 
   .card-info {
     height: 105px;
+    display: flex;
+    flex-direction: column;
 
     .card-name {
       height: 70%;
+      border: 1px solid red;
       overflow: hidden;
     }
   }
@@ -37,6 +48,7 @@
   .genres {
     display: flex;
     justify-content: space-evenly;
+    padding-bottom: 0.4rem;
 
     p {
       border: 1px solid gray;

@@ -24,15 +24,15 @@ const Card = (props) => {
             <div className="rating">
               <RiStarSLine /> {props.show.rating.average}
             </div>
-            <button>
-              <FcLike /> Add to favorites
-            </button>
           </>
         )}
         <div className="card-info">
           <div className="card-name">
             <h1>{props.show.name}</h1>
           </div>
+          <button>
+            <FcLike /> Add to favorites
+          </button>
           <div className="genres">
             {props.show.genres.map((e) => {
               return <p>{e}</p>;

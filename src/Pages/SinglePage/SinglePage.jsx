@@ -11,6 +11,7 @@ import variables from "../../variables.module.scss";
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
+import OneEpisode from "../../Components/SingleEpisode.jsx/OneEpisode";
 
 const SinglePage = (props) => {
   const [seasons, setSeasons] = useState([]);
@@ -21,10 +22,8 @@ const SinglePage = (props) => {
   const [numOfCast, changeNumOfCast] = useState(8);
   const [genreOneSliceBegin, setGenreOneSliceBegin] = useState(0);
   const [genreOneSliceEnd, setGenreOneSliceEnd] = useState(4);
-  const [genreTwoSliceBegin, setGenreTwoSliceBegin] = useState(0);
-  const [genreTwoSliceEnd, setGenreTwoSliceEnd] = useState(4);
-  const [genreThreeSliceBegin, setGenreThreeSliceBegin] = useState(0);
-  const [genreThreeSliceEnd, setGenreThreeSliceEnd] = useState(4);
+  const [characterImageClick, setCharacterImageClick] = useState(false);
+
   const [imageSlice, changeImageSlice] = useState(0);
   const [imageSliceEnd, changeImageSliceEnd] = useState(4);
 
@@ -33,6 +32,8 @@ const SinglePage = (props) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setGenreOneSliceBegin(0);
+    setGenreOneSliceEnd(4);
     changeNumOfCast(8);
 
     fetch(`http://api.tvmaze.com/shows/${id}/seasons`)
@@ -68,9 +69,6 @@ const SinglePage = (props) => {
       return 0;
     })
     .slice(0, 3);
-  console.log(bestRatedEpisodes);
-  console.log(props.fetchResult);
-  console.log(episodes);
 
   const mostRecentEpisodes = [...episodes]
     .sort((a, b) => {
@@ -85,24 +83,26 @@ const SinglePage = (props) => {
   };
 
   const allGenresOfShow = [];
-  console.log(episodes);
 
   const showMoreShows = (arr) => {
-    return arr.map((e) => {
+    const genres = arr.map((e) => {
       return props.fetchResult.filter(
         (el) => el.genres.includes(e) && el.id !== show.id
       );
     });
+    const all = [];
+    genres.forEach((e) => all.push(...e));
+    console.log(all.filter((e, i, arr) => i === arr.indexOf(e)));
+    return all.filter((e, i, arr) => i === arr.indexOf(e));
   };
+  // const moreShowsByGenre = showMoreShows(show.genres);
+  console.log(cast);
+  const moreShows = showMoreShows(show.genres);
 
-  const moreShowsByGenre = showMoreShows(show.genres);
-  console.log(moreShowsByGenre);
-
+  console.log(showMoreShows(show.genres));
   let img = background
     ? background.find((e) => e.type === "background").resolutions.original.url
     : null;
-
-  console.log(crew);
 
   if (
     episodes.length !== 0 &&
@@ -218,7 +218,7 @@ const SinglePage = (props) => {
                 <div className="stars">
                   {cast.length > 1 ? (
                     <h3>
-                      Starring: {cast[0].person.name} , {cast[1].person.name}
+                      Starring: {cast[0].person.name} / {cast[1].person.name}
                     </h3>
                   ) : (
                     <h3>Starring: {cast[0].person.name}</h3>
@@ -244,328 +244,118 @@ const SinglePage = (props) => {
             </div>
           </div>
         </div>
-        <h3 className="title">Best Rated episodes</h3>
-        <div className="episodes">
-          <div className="single-episode">
-            <h3>
-              <div className="episode-top">
-                {bestRatedEpisodes[0].name}
-                <div className="episode-rating">
-                  <RiStarSLine />
-                  {bestRatedEpisodes[0].rating.average}
-                </div>
-              </div>
-            </h3>
-            <div className="episode-details">
-              <h4>
-                Season:{bestRatedEpisodes[0].season}, Episode:
-                {bestRatedEpisodes[0].number}
-              </h4>
-              {bestRatedEpisodes[0].summary ? (
-                <p>{details(bestRatedEpisodes[0])}</p>
-              ) : null}
-            </div>
-            <div className="episode-bottom">
-              <div>
-                <MdOutlineLiveTv />
-                {moment(bestRatedEpisodes[0].airdate).format("DD.MM.YYYY.")}
-              </div>
-              <div>
-                <GiStopwatch /> {bestRatedEpisodes[0].runtime} min
-              </div>
-            </div>
+        <div className="main">
+          <h3 className="title">Best Rated episodes</h3>
+          <div className="episodes">
+            {bestRatedEpisodes.slice(0, 3).map((e) => (
+              <OneEpisode e={e} details={details} />
+            ))}
           </div>
-          <div className="single-episode">
-            <h3>
-              <div className="episode-top">
-                {bestRatedEpisodes[1].name}
-                <div className="episode-rating">
-                  <RiStarSLine />
-                  {bestRatedEpisodes[1].rating.average}
-                </div>
-              </div>
-            </h3>
-            <div className="episode-details">
-              <h4>
-                Season:{bestRatedEpisodes[1].season}, Episode:
-                {bestRatedEpisodes[1].number}
-              </h4>
-              {bestRatedEpisodes[1].summary ? (
-                <p>{details(bestRatedEpisodes[1])}</p>
-              ) : null}
-            </div>
-            <div className="episode-bottom">
-              <div>
-                <MdOutlineLiveTv />
-                {moment(bestRatedEpisodes[1].airdate).format("DD.MM.YYYY.")}
-              </div>
-              <div>
-                <GiStopwatch /> {bestRatedEpisodes[1].runtime} min
-              </div>
-            </div>
-          </div>
-          <div className="single-episode">
-            <h3>
-              <div className="episode-top">
-                {bestRatedEpisodes[2].name}
-                <div className="episode-rating">
-                  <RiStarSLine />
-                  {bestRatedEpisodes[2].rating.average}
-                </div>
-              </div>
-            </h3>
-            <div className="episode-details">
-              <h4>
-                Season:{bestRatedEpisodes[2].season}, Episode:
-                {bestRatedEpisodes[2].number}
-              </h4>
-              {bestRatedEpisodes[2].summary ? (
-                <p>{details(bestRatedEpisodes[2])}</p>
-              ) : null}
-            </div>
-            <div className="episode-bottom">
-              <div>
-                <MdOutlineLiveTv />
-                {moment(bestRatedEpisodes[2].airdate).format("DD.MM.YYYY.")}
-              </div>
-              <div>
-                <GiStopwatch /> {bestRatedEpisodes[2].runtime} min
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="cast-and-recent-episode">
-          <div className="cast-container">
-            <h3 className="title">Cast</h3>
-            <div className="cast">
-              {showCast(cast).map((e) => {
-                return (
-                  <div className="single-person">
-                    {e.person.image != null && e.person.image != undefined ? (
-                      <img src={e.person.image.medium} alt="" />
-                    ) : (
-                      <img
-                        src="https://www.neils.org/wp-content/uploads/2016/06/no-image.png"
-                        alt=""
-                      />
-                    )}
-                    <h3>
-                      {e.person.name} as {e.character.name}
-                    </h3>
-                  </div>
-                );
-              })}
-            </div>
-            {cast.length > 8 ? (
-              numOfCast === 8 ? (
-                <p onClick={() => changeNumOfCast(cast.length)}>
-                  Show all cast
-                </p>
-              ) : (
-                <p onClick={() => changeNumOfCast(8)}>Hide all cast</p>
-              )
-            ) : null}
-          </div>
-
-          <div className="recent-episodes">
-            <h3 className="title">Most recent episodes</h3>
-            <div className="single-episode">
-              <h3>
-                <div className="episode-top">
-                  {mostRecentEpisodes[0].name}
-                  <div className="episode-rating">
-                    <RiStarSLine />
-                    {mostRecentEpisodes[0].rating.average}
-                  </div>
-                </div>
-              </h3>
-              <div className="episode-details">
-                <h4>
-                  Season:{mostRecentEpisodes[0].season}, Episode:
-                  {mostRecentEpisodes[0].number}
-                </h4>
-                {mostRecentEpisodes[0].summary ? (
-                  <p>{details(mostRecentEpisodes[0])}</p>
-                ) : null}
-              </div>
-              <div className="episode-bottom">
-                <div>
-                  <MdOutlineLiveTv />
-                  {moment(mostRecentEpisodes[0].airdate).format("DD.MM.YYYY.")}
-                </div>
-                <div>
-                  <GiStopwatch /> {mostRecentEpisodes[0].runtime} min
-                </div>
-              </div>
-            </div>
-            <div className="single-episode">
-              <h3>
-                <div className="episode-top">
-                  {mostRecentEpisodes[1].name}
-                  <div className="episode-rating">
-                    <RiStarSLine />
-                    {mostRecentEpisodes[1].rating.average}
-                  </div>
-                </div>
-              </h3>
-              <div className="episode-details">
-                <h4>
-                  Season:{mostRecentEpisodes[1].season}, Episode:
-                  {mostRecentEpisodes[1].number}
-                </h4>
-                {mostRecentEpisodes[1].summary ? (
-                  <p>{details(mostRecentEpisodes[1])}</p>
-                ) : null}
-              </div>
-              <div className="episode-bottom">
-                <div>
-                  <MdOutlineLiveTv />
-                  {moment(mostRecentEpisodes[1].airdate).format("DD.MM.YYYY.")}
-                </div>
-                <div>
-                  <GiStopwatch /> {mostRecentEpisodes[1].runtime} min
-                </div>
-              </div>
-            </div>
-            <div className="single-episode">
-              <h3>
-                <div className="episode-top">
-                  {mostRecentEpisodes[2].name}
-                  <div className="episode-rating">
-                    <RiStarSLine />
-                    {mostRecentEpisodes[2].rating.average}
-                  </div>
-                </div>
-              </h3>
-              <div className="episode-details">
-                <h4>
-                  Season:{mostRecentEpisodes[2].season}, Episode:
-                  {mostRecentEpisodes[2].number}
-                </h4>
-                {mostRecentEpisodes[2].summary ? (
-                  <p>{details(mostRecentEpisodes[2])}</p>
-                ) : null}
-              </div>
-              <div className="episode-bottom">
-                <div>
-                  <MdOutlineLiveTv />
-                  {moment(mostRecentEpisodes[2].airdate).format("DD.MM.YYYY.")}
-                </div>
-                <div>
-                  <GiStopwatch /> {mostRecentEpisodes[2].runtime} min
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {allGenresOfShow.length >= 1 && (
-          <div className="more-by-genre">
-            <h3>More {allGenresOfShow[0]}</h3>
-            <div className="single-genre-search">
-              <button
-                disabled={genreOneSliceBegin === 0}
-                onClick={() => {
-                  setGenreOneSliceBegin(genreOneSliceBegin - 4);
-                  setGenreOneSliceEnd(genreOneSliceEnd - 4);
-                }}
-              >
-                {"<"}
-              </button>
-              {moreShowsByGenre[0]
-                .slice(genreOneSliceBegin, genreOneSliceEnd)
-                .map((e) => {
+          <div className="cast-and-recent-episode">
+            <div className="cast-container">
+              <h3 className="title">Cast</h3>
+              <div className="cast">
+                {showCast(cast).map((e) => {
                   return (
-                    <Link to={`/show/${e.id}`}>
-                      <Card show={e} />;
-                    </Link>
+                    <div className="single-person">
+                      {!characterImageClick ? (
+                        <>
+                          {e.person.image != null &&
+                          e.person.image != undefined ? (
+                            <img src={e.person.image.medium} alt="" />
+                          ) : (
+                            <img
+                              src="https://www.neils.org/wp-content/uploads/2016/06/no-image.png"
+                              alt=""
+                            />
+                          )}
+                        </>
+                      ) : (
+                        <>
+                          {e.character.image != null &&
+                          e.character.image != undefined ? (
+                            <img src={e.character.image.medium} alt="" />
+                          ) : (
+                            <img src={e.person.image.medium} alt="" />
+                          )}
+                        </>
+                      )}
+
+                      <div className="single-person-name">
+                        <h3 onClick={() => setCharacterImageClick(false)}>
+                          {e.person.name}
+                        </h3>
+                        <p>as</p>
+                        <h3 onClick={() => setCharacterImageClick(true)}>
+                          {e.character.name}
+                        </h3>
+                      </div>
+                    </div>
                   );
                 })}
-              <button
-                disabled={genreOneSliceBegin >= moreShowsByGenre[0].length - 4}
-                onClick={() => {
-                  setGenreOneSliceBegin(genreOneSliceBegin + 4);
-                  setGenreOneSliceEnd(genreOneSliceEnd + 4);
-                }}
-              >
-                {">"}
-              </button>
+              </div>
+
+              {cast.length > 8 ? (
+                numOfCast === 8 ? (
+                  <div className="show-more">
+                    <p onClick={() => changeNumOfCast(cast.length)}>
+                      Show all cast
+                    </p>
+                  </div>
+                ) : (
+                  <div className="show-more">
+                    <p onClick={() => changeNumOfCast(8)}>Hide all cast</p>
+                  </div>
+                )
+              ) : null}
             </div>
-            {allGenresOfShow.length >= 2 && (
-              <>
-                <h3>More {allGenresOfShow[1]}</h3>
-                <div className="single-genre-search">
-                  <button
-                    disabled={genreTwoSliceBegin === 0}
-                    onClick={() => {
-                      setGenreTwoSliceBegin(genreTwoSliceBegin - 4);
-                      setGenreTwoSliceEnd(genreTwoSliceEnd - 4);
-                    }}
-                  >
-                    {"<"}
-                  </button>
-
-                  {moreShowsByGenre[1]
-                    .slice(genreTwoSliceBegin, genreTwoSliceEnd)
-                    .map((e) => {
-                      return (
-                        <Link to={`/show/${e.id}`}>
-                          <Card show={e} />;
-                        </Link>
-                      );
-                    })}
-                  <button
-                    disabled={
-                      genreTwoSliceBegin >= moreShowsByGenre[1].length - 4
-                    }
-                    onClick={() => {
-                      setGenreTwoSliceBegin(genreTwoSliceBegin + 4);
-                      setGenreTwoSliceEnd(genreTwoSliceEnd + 4);
-                    }}
-                  >
-                    {">"}
-                  </button>
-                </div>
-              </>
-            )}
-            {allGenresOfShow.length >= 3 && (
-              <>
-                <h3>More {allGenresOfShow[2]}</h3>
-                <div className="single-genre-search">
-                  <button
-                    disabled={genreThreeSliceBegin === 0}
-                    onClick={() => {
-                      setGenreThreeSliceBegin(genreThreeSliceBegin - 4);
-                      setGenreThreeSliceEnd(genreThreeSliceEnd - 4);
-                    }}
-                  >
-                    {"<"}
-                  </button>
-
-                  {moreShowsByGenre[2]
-                    .slice(genreThreeSliceBegin, genreThreeSliceEnd)
-                    .map((e) => {
-                      return (
-                        <Link to={`/show/${e.id}`}>
-                          <Card show={e} />;
-                        </Link>
-                      );
-                    })}
-                  <button
-                    disabled={
-                      genreThreeSliceBegin >= moreShowsByGenre[2].length - 4
-                    }
-                    onClick={() => {
-                      setGenreThreeSliceBegin(genreThreeSliceBegin + 4);
-                      setGenreThreeSliceEnd(genreThreeSliceEnd + 4);
-                    }}
-                  >
-                    {">"}
-                  </button>
-                </div>
-              </>
-            )}
+            <div className="recent-episodes">
+              <h3 className="title">Most recent episodes</h3>
+              {mostRecentEpisodes.slice(0, 3).map((e) => (
+                <OneEpisode e={e} details={details} />
+              ))}
+            </div>
           </div>
-        )}
+          {allGenresOfShow.length >= 1 && (
+            <div className="more-by-genre">
+              <h3 className="title">Similar Shows</h3>
+              <div className="single-genre-search">
+                <button
+                  className="btn-single-genre"
+                  disabled={genreOneSliceBegin === 0}
+                  onClick={() => {
+                    setGenreOneSliceBegin(genreOneSliceBegin - 4);
+                    setGenreOneSliceEnd(genreOneSliceEnd - 4);
+                  }}
+                >
+                  {"<"}
+                </button>
+                {moreShows
+                  .slice(genreOneSliceBegin, genreOneSliceEnd)
+                  .map((e) => {
+                    return (
+                      <Link to={`/show/${e.id}`}>
+                        <Card show={e} />;
+                      </Link>
+                    );
+                  })}
+                <button
+                  className="btn-single-genre"
+                  disabled={
+                    genreOneSliceBegin >=
+                    moreShows.length - (genreOneSliceEnd - genreOneSliceBegin)
+                  }
+                  onClick={() => {
+                    setGenreOneSliceBegin(genreOneSliceBegin + 4);
+                    setGenreOneSliceEnd(genreOneSliceEnd + 4);
+                  }}
+                >
+                  {">"}
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     );
   else return <p>Loading...</p>;

@@ -1,0 +1,70 @@
+@import "../../variables.module.scss";
+
+.single-episode {
+  display: flex;
+  flex-direction: column;
+  background-color: $textColor;
+  min-height: 12rem;
+  color: $mainColor;
+  border-radius: 10px;
+  h4 {
+    background-color: #772f1a;
+    opacity: 1;
+    color: rgba(255, 255, 255, 0.582);
+    text-align: end;
+    padding-right: 2%;
+    flex-grow: 0;
+    flex-shrink: 1;
+    width: 42%;
+    color: $textColor;
+    align-self: flex-end;
+    -webkit-clip-path: polygon(0 0, 101% 0, 100% 100%, 10% 100%);
+    clip-path: polygon(0 0, 101% 0, 100% 100%, 10% 100%);
+    margin-bottom: -10px;
+  }
+  .episode-top {
+    font-size: 1.3rem;
+    width: 100%;
+    height: 30px;
+    flex-grow: 0;
+    background-color: #772f1a;
+    color: $textColor;
+    display: flex;
+    align-items: center;
+    padding: 0 0.5rem;
+    justify-content: space-between;
+    margin-bottom: -2px;
+
+    .episode-rating {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .episode-details {
+    padding: 0 1rem;
+    flex-grow: 1;
+    h3 {
+      padding: 1rem 0;
+      color: #772f1a;
+    }
+  }
+
+  .episode-bottom {
+    margin: 10px 0;
+    height: 30px;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    color: #772f1a;
+
+    div {
+      border-bottom: 1px solid #772f1a;
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+    }
+  }
+}
