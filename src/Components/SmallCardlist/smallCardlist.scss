@@ -1,0 +1,19 @@
+@import "../../variables.module.scss";
+
+.small-cardlist-search {
+  background-color: $textColor;
+
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid red;
+
+  .btn-small-cardlist {
+    height: 60px;
+    background-color: #772f1a;
+    color: $textColor;
+    width: 60px;
+    font-size: 2rem;
+    // background-color: transparent;
+    align-self: center;
+  }
+}

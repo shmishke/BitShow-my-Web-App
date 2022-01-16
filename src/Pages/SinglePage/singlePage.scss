@@ -13,7 +13,6 @@
   }
   h2 {
     text-align: center;
-    // padding-bottom: 1rem;
     font-size: 2.5rem;
     color: $mainColor;
     background-color: $textColor;
@@ -259,25 +258,6 @@
 
       .single-episode {
         margin-bottom: 2.8rem;
-      }
-    }
-  }
-  .more-by-genre {
-    .single-genre-search {
-      background-color: $textColor;
-
-      display: flex;
-      justify-content: space-around;
-      border: 1px solid red;
-
-      .btn-single-genre {
-        height: 60px;
-        background-color: #772f1a;
-        color: $textColor;
-        width: 60px;
-        font-size: 2rem;
-        // background-color: transparent;
-        align-self: center;
       }
     }
   }

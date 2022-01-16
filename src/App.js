@@ -10,12 +10,20 @@ function App() {
   const [fetchResult, getFetchResult] = useState(false);
   const [numberOfCardsDisplaying, changeNumberOfCardsDisplaying] = useState(10);
   const [activePage, changeActivePage] = useState(0);
+  const [recentlyViewedShows, changeRecentlyViewedShows] = useState(
+    JSON.parse(window.localStorage.getItem("recentlyViewed"))
+  );
+  const [currentShow, changeCurrentShow] = useState(-1);
+  const [watchList, addToWatchList] = useState(
+    JSON.parse(window.localStorage.getItem("watchList"))
+  );
 
   useEffect(() => {
     fetch(`http://api.tvmaze.com/shows`)
       .then((res) => res.json())
       .then((res) => getFetchResult(res));
   }, []);
+
   return (
     <Router>
       <>
@@ -33,14 +41,34 @@ function App() {
                     }
                     activePage={activePage}
                     changeActivePage={changeActivePage}
+                    recentlyViewedShows={recentlyViewedShows}
+                    changeRecentlyViewedShows={changeRecentlyViewedShows}
+                    changeCurrentShow={changeCurrentShow}
+                    watchList={watchList}
+                    addToWatchList={addToWatchList}
                   />
                 </Route>
                 <Route path="/show/:id">
-                  <SinglePage fetchResult={fetchResult} />
+                  <SinglePage
+                    fetchResult={fetchResult}
+                    recentlyViewedShows={recentlyViewedShows}
+                    changeRecentlyViewedShows={changeRecentlyViewedShows}
+                    changeCurrentShow={changeCurrentShow}
+                    watchList={watchList}
+                    addToWatchList={addToWatchList}
+                  />
                 </Route>
               </Switch>
             </div>
-            <Footer />
+            <Footer
+              fetchResult={fetchResult}
+              recentlyViewedShows={recentlyViewedShows}
+              changeRecentlyViewedShows={changeRecentlyViewedShows}
+              currentShow={currentShow}
+              changeCurrentShow={changeCurrentShow}
+              watchList={watchList}
+              addToWatchList={addToWatchList}
+            />
           </>
         )}
       </>

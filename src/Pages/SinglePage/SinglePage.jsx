@@ -5,14 +5,13 @@ import { RiStarSLine } from "react-icons/ri";
 import { GiStopwatch } from "react-icons/gi";
 import { MdOutlineLiveTv } from "react-icons/md";
 import moment from "moment";
-import Card from "../../Components/Card/Card";
-import { Link } from "react-router-dom";
 import variables from "../../variables.module.scss";
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import OneEpisode from "../../Components/SingleEpisode.jsx/OneEpisode";
 import OnePerson from "../../Components/OnePerson/OnePerson";
+import SmallCardlist from "../../Components/SmallCardlist/SmallCardlist";
 
 const SinglePage = (props) => {
   const [seasons, setSeasons] = useState([]);
@@ -21,8 +20,6 @@ const SinglePage = (props) => {
   const [episodes, setEpisodes] = useState([]);
   const [background, setBackground] = useState();
   const [numOfCast, changeNumOfCast] = useState(8);
-  const [genreOneSliceBegin, setGenreOneSliceBegin] = useState(0);
-  const [genreOneSliceEnd, setGenreOneSliceEnd] = useState(4);
 
   const [imageSlice, changeImageSlice] = useState(0);
   const [imageSliceEnd, changeImageSliceEnd] = useState(4);
@@ -32,8 +29,8 @@ const SinglePage = (props) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    setGenreOneSliceBegin(0);
-    setGenreOneSliceEnd(4);
+    changeImageSlice(0);
+    changeImageSliceEnd(4);
     changeNumOfCast(8);
 
     fetch(`http://api.tvmaze.com/shows/${id}/seasons`)
@@ -92,13 +89,11 @@ const SinglePage = (props) => {
     });
     const all = [];
     genres.forEach((e) => all.push(...e));
-    console.log(all.filter((e, i, arr) => i === arr.indexOf(e)));
     return all.filter((e, i, arr) => i === arr.indexOf(e));
   };
-  console.log(cast);
+
   const moreShows = showMoreShows(show.genres);
 
-  console.log(showMoreShows(show.genres));
   let img = background
     ? background.find((e) => e.type === "background").resolutions.original.url
     : null;
@@ -116,12 +111,14 @@ const SinglePage = (props) => {
         <div
           className="top-of-single-page"
           style={{
-            background: img ? `url(${img})` : variables.mainColor,
+            backgroundImage: `url(${img})`,
+            backgroundColor: variables.mainColor,
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
           }}
         >
+          /
           <div className="image-info">
             <div className="image">
               <img src={show.image.original} alt="#" />
@@ -282,40 +279,14 @@ const SinglePage = (props) => {
           {allGenresOfShow.length >= 1 && (
             <div className="more-by-genre">
               <h3 className="title">Similar Shows</h3>
-              <div className="single-genre-search">
-                <button
-                  className="btn-single-genre"
-                  disabled={genreOneSliceBegin === 0}
-                  onClick={() => {
-                    setGenreOneSliceBegin(genreOneSliceBegin - 4);
-                    setGenreOneSliceEnd(genreOneSliceEnd - 4);
-                  }}
-                >
-                  {"<"}
-                </button>
-                {moreShows
-                  .slice(genreOneSliceBegin, genreOneSliceEnd)
-                  .map((e) => {
-                    return (
-                      <Link to={`/show/${e.id}`}>
-                        <Card show={e} />;
-                      </Link>
-                    );
-                  })}
-                <button
-                  className="btn-single-genre"
-                  disabled={
-                    genreOneSliceBegin >=
-                    moreShows.length - (genreOneSliceEnd - genreOneSliceBegin)
-                  }
-                  onClick={() => {
-                    setGenreOneSliceBegin(genreOneSliceBegin + 4);
-                    setGenreOneSliceEnd(genreOneSliceEnd + 4);
-                  }}
-                >
-                  {">"}
-                </button>
-              </div>
+              <SmallCardlist
+                showsToDisplay={moreShows}
+                recentlyViewedShows={props.recentlyViewedShows}
+                changeRecentlyViewedShows={props.changeRecentlyViewedShows}
+                changeCurrentShow={props.changeCurrentShow}
+                watchList={props.watchList}
+                addToWatchList={props.addToWatchList}
+              />
             </div>
           )}
         </div>

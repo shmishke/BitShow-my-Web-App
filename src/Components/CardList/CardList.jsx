@@ -1,5 +1,3 @@
-import { MdCheckBox } from "react-icons/md";
-import { Link } from "react-router-dom";
 import { useState } from "react/cjs/react.development";
 import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
@@ -9,7 +7,6 @@ const CardList = (props) => {
   const [search, searchValue] = useState("");
   const originalData = props.fetchResult.map((e) => e);
   const [sort, changeSort] = useState(originalData);
-  const [filteredShows, setFilteredShows] = useState([]);
 
   const results = sort.slice(
     props.numberOfCardsDisplaying * props.activePage,
@@ -33,31 +30,9 @@ const CardList = (props) => {
       return 0;
     });
 
-  const searchResult = sort
-    .filter((e) => e.name.toLowerCase().includes(search.toLowerCase()))
-    .map((e) => {
-      return (
-        <Link to={`/show/${e.id}`}>
-          <Card show={e} />;
-        </Link>
-      );
-    });
-
-  const filteredList = [];
-  const filtered = filteredShows.map((e) => {
-    return sort.filter((el) => el.genres.includes(e));
-  });
-
-  const genres = [];
-  props.fetchResult.forEach((e) => genres.push(...e.genres));
-  const Allgenres = genres.filter((e, i) => i === genres.indexOf(e));
-  // .filter((e, i, arr) => e === arr.indexOf(e));
-
-  console.log(genres);
-  console.log(Allgenres);
-
-  console.log(filtered);
-  console.log(filteredShows);
+  const searchResult = sort.filter((e) =>
+    e.name.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <>
@@ -85,11 +60,6 @@ const CardList = (props) => {
           <option value="h-l"> Ratings (Low to High)</option>
         </select>
       </label>
-      <div className="checkbox-div">
-        {Allgenres.map((e) => {
-          return <></>;
-        })}
-      </div>
       {!search && (
         <>
           {!(props.numberOfCardsDisplaying >= props.fetchResult.length) && (
@@ -107,9 +77,14 @@ const CardList = (props) => {
           <div className="card-list">
             {results.map((e) => {
               return (
-                <Link to={`/show/${e.id}`}>
-                  <Card show={e} />;
-                </Link>
+                <Card
+                  show={e}
+                  recentlyViewedShows={props.recentlyViewedShows}
+                  changeRecentlyViewedShows={props.changeRecentlyViewedShows}
+                  changeCurrentShow={props.changeCurrentShow}
+                  watchList={props.watchList}
+                  addToWatchList={props.addToWatchList}
+                />
               );
             })}
           </div>
@@ -117,7 +92,19 @@ const CardList = (props) => {
       )}
       {search && (
         <div className="card-list">
-          {searchResult.length >= 1 ? searchResult : <p>No results found.</p>}
+          {searchResult.length >= 1 ? (
+            searchResult.map((e) => {
+              return (
+                <Card
+                  show={e}
+                  watchList={props.watchList}
+                  addToWatchList={props.addToWatchList}
+                />
+              );
+            })
+          ) : (
+            <p>No results found.</p>
+          )}
         </div>
       )}
     </>

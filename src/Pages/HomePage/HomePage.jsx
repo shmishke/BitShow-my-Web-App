@@ -28,10 +28,15 @@ const HomePage = (props) => {
 
       <CardList
         fetchResult={props.fetchResult}
+        recentlyViewedShows={props.recentlyViewedShows}
+        changeRecentlyViewedShows={props.changeRecentlyViewedShows}
         activePage={props.activePage}
         changeActivePage={props.changeActivePage}
         numberOfCardsDisplaying={props.numberOfCardsDisplaying}
         changeNumberOfCardsDisplaying={props.changeNumberOfCardsDisplaying}
+        changeCurrentShow={props.changeCurrentShow}
+        watchList={props.watchList}
+        addToWatchList={props.addToWatchList}
       />
     </>
   );

@@ -25,7 +25,6 @@ const Carousel = (props) => {
     .replace("<i>", "")
     .replace("</i>", "");
 
-  console.log(bestRatedShows[carouselShow]);
   const showId = bestRatedShows[carouselShow].id;
 
   useEffect(() => {
