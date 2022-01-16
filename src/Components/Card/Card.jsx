@@ -23,9 +23,11 @@ const Card = (props) => {
   };
 
   useEffect(() => {
-    if (showsInWatchlist && showsInWatchlist.includes(props.show.id)) {
-      setAddedToWatchList(true);
-    } else setAddedToWatchList(false);
+    if (showsInWatchlist)
+      showsInWatchlist.includes(props.show.id)
+        ? setAddedToWatchList(true)
+        : setAddedToWatchList(false);
+    else setAddedToWatchList(false);
   }, [showsInWatchlist]);
 
   return (
@@ -67,10 +69,9 @@ const Card = (props) => {
             <button
               onClick={() => {
                 setAddedToWatchList(false);
-                const shows = JSON.parse(
-                  window.localStorage.getItem("watchList")
-                ).filter((e) => e !== props.show.id);
-                console.log(shows);
+                const shows = showsInWatchlist.filter(
+                  (e) => e !== props.show.id
+                );
                 if (shows.length === 0) {
                   props.addToWatchList(null);
                   window.localStorage.removeItem("watchList");
