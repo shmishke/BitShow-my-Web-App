@@ -4,10 +4,7 @@ import Carousel from "../../Components/Carousel/Carousel";
 import DisplayNCards from "../../Components/DisplayNCards/DisplayNCards";
 import variables from "../../variables.module.scss";
 
-console.log(variables);
-
 const HomePage = (props) => {
-  console.log(props.fetchResult);
   return (
     <>
       <div className="top-of-page">

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react/cjs/react.development";
 
 const Card = (props) => {
-  const [addedToWatchlist, setAddedToWatchList] = useState();
+  const [addedToWatchlist, setAddedToWatchList] = useState(false);
 
   const showsInWatchlist = JSON.parse(window.localStorage.getItem("watchList"));
 
@@ -22,12 +22,26 @@ const Card = (props) => {
     }
   };
 
+  const removeFromStorage = () => {
+    if (showsInWatchlist) {
+      const shows = JSON.parse(window.localStorage.getItem("watchList")).filter(
+        (e) => e !== props.show.id
+      );
+      if (shows.length === 0) {
+        props.addToWatchList(null);
+        window.localStorage.removeItem("watchList");
+      } else {
+        props.addToWatchList(shows);
+        window.localStorage.setItem("watchList", JSON.stringify(shows));
+      }
+    }
+    setAddedToWatchList(false);
+  };
+
   useEffect(() => {
-    if (showsInWatchlist)
-      showsInWatchlist.includes(props.show.id)
-        ? setAddedToWatchList(true)
-        : setAddedToWatchList(false);
-    else setAddedToWatchList(false);
+    showsInWatchlist && showsInWatchlist.includes(props.show.id)
+      ? setAddedToWatchList(true)
+      : setAddedToWatchList(false);
   }, [showsInWatchlist]);
 
   return (
@@ -66,23 +80,7 @@ const Card = (props) => {
               <FcLike /> Add to favorites
             </button>
           ) : (
-            <button
-              onClick={() => {
-                setAddedToWatchList(false);
-                const shows = showsInWatchlist.filter(
-                  (e) => e !== props.show.id
-                );
-                if (shows.length === 0) {
-                  props.addToWatchList(null);
-                  window.localStorage.removeItem("watchList");
-                } else {
-                  window.localStorage.setItem(
-                    "watchList",
-                    JSON.stringify(shows)
-                  );
-                }
-              }}
-            >
+            <button onClick={removeFromStorage}>
               <FcLike /> Remove from Favorites
             </button>
           )}

@@ -5,6 +5,7 @@ import Header from "./Components/Header/Header";
 import HomePage from "./Pages/HomePage/HomePage";
 import "./app.scss";
 import SinglePage from "./Pages/SinglePage/SinglePage";
+import WatchList from "./Components/WatchList/WatchList";
 
 function App() {
   const [fetchResult, getFetchResult] = useState(false);
@@ -69,6 +70,7 @@ function App() {
               watchList={watchList}
               addToWatchList={addToWatchList}
             />
+            {/* <WatchList fetchResult={fetchResult} /> */}
           </>
         )}
       </>
