@@ -5,7 +5,6 @@ import Header from "./Components/Header/Header";
 import HomePage from "./Pages/HomePage/HomePage";
 import "./app.scss";
 import SinglePage from "./Pages/SinglePage/SinglePage";
-import WatchList from "./Components/WatchList/WatchList";
 
 function App() {
   const [fetchResult, getFetchResult] = useState(false);
@@ -14,7 +13,6 @@ function App() {
   const [recentlyViewedShows, changeRecentlyViewedShows] = useState(
     JSON.parse(window.localStorage.getItem("recentlyViewed"))
   );
-  const [currentShow, changeCurrentShow] = useState(-1);
   const [watchList, addToWatchList] = useState(
     JSON.parse(window.localStorage.getItem("watchList"))
   );
@@ -30,7 +28,11 @@ function App() {
       <>
         {fetchResult && (
           <>
-            <Header />
+            <Header
+              fetchResult={fetchResult}
+              watchList={watchList}
+              addToWatchList={addToWatchList}
+            />
             <div className="main">
               <Switch>
                 <Route exact path="/">
@@ -44,7 +46,6 @@ function App() {
                     changeActivePage={changeActivePage}
                     recentlyViewedShows={recentlyViewedShows}
                     changeRecentlyViewedShows={changeRecentlyViewedShows}
-                    changeCurrentShow={changeCurrentShow}
                     watchList={watchList}
                     addToWatchList={addToWatchList}
                   />
@@ -54,7 +55,6 @@ function App() {
                     fetchResult={fetchResult}
                     recentlyViewedShows={recentlyViewedShows}
                     changeRecentlyViewedShows={changeRecentlyViewedShows}
-                    changeCurrentShow={changeCurrentShow}
                     watchList={watchList}
                     addToWatchList={addToWatchList}
                   />
@@ -65,12 +65,9 @@ function App() {
               fetchResult={fetchResult}
               recentlyViewedShows={recentlyViewedShows}
               changeRecentlyViewedShows={changeRecentlyViewedShows}
-              currentShow={currentShow}
-              changeCurrentShow={changeCurrentShow}
               watchList={watchList}
               addToWatchList={addToWatchList}
             />
-            {/* <WatchList fetchResult={fetchResult} /> */}
           </>
         )}
       </>

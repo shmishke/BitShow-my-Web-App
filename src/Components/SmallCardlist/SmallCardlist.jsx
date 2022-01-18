@@ -24,7 +24,6 @@ const SmallCardlist = (props) => {
             show={e}
             recentlyViewedShows={props.recentlyViewedShows}
             changeRecentlyViewedShows={props.changeRecentlyViewedShows}
-            changeCurrentShow={props.changeCurrentShow}
             watchList={props.watchList}
             addToWatchList={props.addToWatchList}
           />

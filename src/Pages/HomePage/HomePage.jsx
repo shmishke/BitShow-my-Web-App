@@ -2,7 +2,6 @@ import CardList from "../../Components/CardList/CardList";
 import "./homePage.scss";
 import Carousel from "../../Components/Carousel/Carousel";
 import DisplayNCards from "../../Components/DisplayNCards/DisplayNCards";
-import variables from "../../variables.module.scss";
 
 const HomePage = (props) => {
   return (
@@ -31,7 +30,6 @@ const HomePage = (props) => {
         changeActivePage={props.changeActivePage}
         numberOfCardsDisplaying={props.numberOfCardsDisplaying}
         changeNumberOfCardsDisplaying={props.changeNumberOfCardsDisplaying}
-        changeCurrentShow={props.changeCurrentShow}
         watchList={props.watchList}
         addToWatchList={props.addToWatchList}
       />

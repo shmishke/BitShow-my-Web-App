@@ -138,7 +138,29 @@ const SinglePage = (props) => {
                   <h3> {moment(show.premiered).format("DD.MM.YYYY.")}</h3>
                 </div>
                 <div className="add-to-watchlist">
-                  <button>Add to watchlist</button>
+                  <button
+                    onClick={() => {
+                      if (props.watchList) {
+                        const shows = [
+                          Number(id),
+                          ...props.watchList.filter((e) => e !== Number(id)),
+                        ];
+                        props.addToWatchList(shows);
+                        window.localStorage.setItem(
+                          "watchList",
+                          JSON.stringify(shows)
+                        );
+                      } else {
+                        window.localStorage.setItem(
+                          "watchList",
+                          JSON.stringify([Number(id)])
+                        );
+                        props.addToWatchList([Number(id)]);
+                      }
+                    }}
+                  >
+                    Add to watchlist
+                  </button>
                   <div className="heart">
                     <FaRegHeart />
                   </div>
@@ -283,7 +305,6 @@ const SinglePage = (props) => {
                 showsToDisplay={moreShows}
                 recentlyViewedShows={props.recentlyViewedShows}
                 changeRecentlyViewedShows={props.changeRecentlyViewedShows}
-                changeCurrentShow={props.changeCurrentShow}
                 watchList={props.watchList}
                 addToWatchList={props.addToWatchList}
               />

@@ -51,7 +51,6 @@ const Card = (props) => {
           <div
             className="click-to"
             onClick={() => {
-              props.changeCurrentShow(props.show.id);
               addToStorage(
                 props.recentlyViewedShows,
                 props.changeRecentlyViewedShows,

@@ -1,0 +1,29 @@
+.watchlist-single-card {
+  display: flex;
+
+  .watchlist-img {
+    flex-grow: 0;
+    flex-shrink: 0;
+    border: 1px solid green;
+    height: 12vh;
+    width: 25%;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .watchlist-info {
+    border: 1px solid blue;
+    flex-grow: 1;
+
+    .watchlist-top {
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        width: 10%;
+      }
+    }
+  }
+}

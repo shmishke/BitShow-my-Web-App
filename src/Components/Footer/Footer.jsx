@@ -2,15 +2,21 @@ import "./footer.scss";
 import { DiReact } from "react-icons/di";
 import { DiJavascript1 } from "react-icons/di";
 import SmallCardlist from "../SmallCardlist/SmallCardlist";
+import { useLocation } from "react-router-dom";
 
 const Footer = (props) => {
+  const location = useLocation();
+  const currentShow = Number.parseInt(
+    location.pathname.split("").reverse().join("")
+  );
+
   const showsToDisplay = () => {
     const ids = JSON.parse(
       window.localStorage.getItem("recentlyViewed")
-    ).filter((e) => e != props.currentShow);
-
+    ).filter((e) => e != currentShow);
     return ids.map((e) => props.fetchResult.find((el) => el.id === e));
   };
+
   return (
     <>
       <div className="footer">
@@ -23,7 +29,6 @@ const Footer = (props) => {
                   showsToDisplay={showsToDisplay()}
                   recentlyViewedShows={props.recentlyViewedShows}
                   changeRecentlyViewedShows={props.changeRecentlyViewedShows}
-                  changeCurrentShow={props.changeCurrentShow}
                   watchList={props.watchList}
                   addToWatchList={props.addToWatchList}
                 />

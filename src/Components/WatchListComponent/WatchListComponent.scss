@@ -1,0 +1,14 @@
+.page-container {
+  position: fixed;
+
+  overflow: hidden;
+  height: 100vh;
+  background-color: red;
+  z-index: 1;
+  .watchlist-container {
+    width: 20vw;
+    margin-right: -2px;
+    height: 100%;
+    border: 1px solid red;
+  }
+}
