@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import moment from "moment";
+import OneEpisode from "../../Components/SingleEpisode.jsx/OneEpisode";
+import OnePerson from "../../Components/OnePerson/OnePerson";
+import SmallCardlist from "../../Components/SmallCardlist/SmallCardlist";
 import "./singlePage.scss";
 import { RiStarSLine } from "react-icons/ri";
 import { GiStopwatch } from "react-icons/gi";
 import { MdOutlineLiveTv } from "react-icons/md";
-import moment from "moment";
-import variables from "../../variables.module.scss";
-import { FaAngleLeft } from "react-icons/fa";
-import { FaAngleRight } from "react-icons/fa";
-import { FaHeartBroken } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
-import OneEpisode from "../../Components/SingleEpisode.jsx/OneEpisode";
-import OnePerson from "../../Components/OnePerson/OnePerson";
-import SmallCardlist from "../../Components/SmallCardlist/SmallCardlist";
+import {
+  FaAngleLeft,
+  FaAngleRight,
+  FaHeartBroken,
+  FaHeart,
+  FaRegHeart,
+} from "react-icons/fa";
 
 const SinglePage = (props) => {
   const [seasons, setSeasons] = useState([]);
@@ -124,7 +126,6 @@ const SinglePage = (props) => {
           className="top-of-single-page"
           style={{
             backgroundImage: `url(${img})`,
-            backgroundColor: variables.mainColor,
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
@@ -165,7 +166,8 @@ const SinglePage = (props) => {
                   }
                 >
                   {addedOrHoveredBtn.added ? (
-                    <button
+                    <div
+                      className="add-to-watchlist-btn"
                       onClick={() => {
                         props.addAndRemoveStorageFunc.remove(
                           props.watchList,
@@ -177,18 +179,24 @@ const SinglePage = (props) => {
                       }}
                     >
                       {addedOrHoveredBtn.hovered ? (
-                        <p>
-                          Remove from watchlist <FaHeartBroken />
-                        </p>
+                        <div className="add-to-watch-list-text">
+                          Remove from watchlist
+                          <div className="heart">
+                            <FaHeartBroken />
+                          </div>
+                        </div>
                       ) : (
-                        <p>
-                          Added to watchlist
-                          <FaHeart />
-                        </p>
+                        <div className="add-to-watch-list-text">
+                          Added to watchlist{" "}
+                          <div className="heart">
+                            <FaHeart />
+                          </div>
+                        </div>
                       )}
-                    </button>
+                    </div>
                   ) : (
-                    <button
+                    <div
+                      className="add-to-watchlist-btn"
                       onClick={() => {
                         props.addAndRemoveStorageFunc.add(
                           props.watchList,
@@ -199,27 +207,14 @@ const SinglePage = (props) => {
                         setAddedOrHoveredBtn({ added: true, hovered: false });
                       }}
                     >
-                      <p>
-                        {" "}
-                        add to watchList <FaHeart />
-                      </p>
-                    </button>
+                      <div className="add-to-watch-list-text">
+                        Add to watchlist
+                        <div className="heart">
+                          <FaRegHeart />
+                        </div>
+                      </div>
+                    </div>
                   )}
-                  {/* <button
-                    onClick={() => {
-                      props.addAndRemoveStorageFunc.add(
-                        props.watchList,
-                        props.addToWatchList,
-                        id,
-                        "watchList"
-                      );
-                    }}
-                  >
-                    Add to watchlist
-                  </button>
-                  <div className="heart">
-                    <FaRegHeart />
-                  </div> */}
                 </div>
               </div>
               <div className="seasons-episodes">

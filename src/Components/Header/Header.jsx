@@ -1,5 +1,6 @@
 import "./header.scss";
 import { FaSearch } from "react-icons/fa";
+import { BsEye, BsEyeFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import WatchListComponent from "../WatchListComponent/WatchListComponent.jsx";
@@ -23,6 +24,7 @@ const Header = (props) => {
               placeholder="Search TV shows"
             />
             <button
+              className="watchlist-toggle-btn "
               onClick={() => {
                 if (searchWidth === 0) setSearchWidth(150);
                 if (searchWidth > 0) setSearchWidth(0);
@@ -31,23 +33,41 @@ const Header = (props) => {
               <FaSearch />
             </button>
           </div>
-          {isButtonClicked ? (
-            <button
-              onClick={() => {
-                changeIsButtonClicked(false);
-              }}
-            >
-              close watchlist
-            </button>
-          ) : (
-            <button
-              onClick={() => {
-                changeIsButtonClicked(true);
-              }}
-            >
-              watchlist
-            </button>
-          )}
+          <div className="watchlist-btn">
+            {isButtonClicked ? (
+              <button
+                className="watchlist-toggle-btn eye-btn"
+                onClick={() => {
+                  changeIsButtonClicked(false);
+                }}
+              >
+                <div className="eye">
+                  <BsEyeFill />
+                </div>
+                <div
+                  className={props.watchList ? "number" : "number display-none"}
+                >
+                  {props.watchList ? props.watchList.length : null}
+                </div>
+              </button>
+            ) : (
+              <button
+                className="watchlist-toggle-btn eye-btn"
+                onClick={() => {
+                  changeIsButtonClicked(true);
+                }}
+              >
+                <div className="eye">
+                  <BsEye />
+                </div>
+                <div
+                  className={props.watchList ? "number" : "number display-none"}
+                >
+                  {props.watchList ? props.watchList.length : null}
+                </div>
+              </button>
+            )}
+          </div>
 
           <div
             className="watchlist-btn "
