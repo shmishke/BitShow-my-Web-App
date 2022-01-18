@@ -83,6 +83,7 @@ const CardList = (props) => {
                   changeRecentlyViewedShows={props.changeRecentlyViewedShows}
                   watchList={props.watchList}
                   addToWatchList={props.addToWatchList}
+                  addAndRemoveStorageFunc={props.addAndRemoveStorageFunc}
                 />
               );
             })}
@@ -100,6 +101,7 @@ const CardList = (props) => {
                   changeRecentlyViewedShows={props.changeRecentlyViewedShows}
                   watchList={props.watchList}
                   addToWatchList={props.addToWatchList}
+                  addAndRemoveStorageFunc={props.addAndRemoveStorageFunc}
                 />
               );
             })

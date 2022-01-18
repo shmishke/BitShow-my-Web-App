@@ -6,43 +6,11 @@ import { useEffect, useState } from "react/cjs/react.development";
 const Card = (props) => {
   const [addedToWatchlist, setAddedToWatchList] = useState(false);
 
-  const showsInWatchlist = JSON.parse(window.localStorage.getItem("watchList"));
-
-  const addToStorage = (clickedShows, setClickedShows, storageName) => {
-    if (clickedShows) {
-      const shows = [
-        props.show.id,
-        ...clickedShows.filter((e) => e != props.show.id),
-      ];
-      setClickedShows(shows);
-      window.localStorage.setItem(storageName, JSON.stringify(shows));
-    } else {
-      window.localStorage.setItem(storageName, JSON.stringify([props.show.id]));
-      setClickedShows([props.show.id]);
-    }
-  };
-
-  const removeFromStorage = () => {
-    if (showsInWatchlist) {
-      const shows = JSON.parse(window.localStorage.getItem("watchList")).filter(
-        (e) => e !== props.show.id
-      );
-      if (shows.length === 0) {
-        props.addToWatchList(null);
-        window.localStorage.removeItem("watchList");
-      } else {
-        props.addToWatchList(shows);
-        window.localStorage.setItem("watchList", JSON.stringify(shows));
-      }
-    }
-    setAddedToWatchList(false);
-  };
-
   useEffect(() => {
-    showsInWatchlist && showsInWatchlist.includes(props.show.id)
+    props.watchList && props.watchList.includes(props.show.id)
       ? setAddedToWatchList(true)
       : setAddedToWatchList(false);
-  }, [showsInWatchlist]);
+  }, [props.watchList]);
 
   return (
     <>
@@ -51,9 +19,10 @@ const Card = (props) => {
           <div
             className="click-to"
             onClick={() => {
-              addToStorage(
+              props.addAndRemoveStorageFunc.add(
                 props.recentlyViewedShows,
                 props.changeRecentlyViewedShows,
+                props.show.id,
                 "recentlyViewed"
               );
             }}
@@ -69,9 +38,10 @@ const Card = (props) => {
             <button
               onClick={() => {
                 setAddedToWatchList(true);
-                addToStorage(
+                props.addAndRemoveStorageFunc.add(
                   props.watchList,
                   props.addToWatchList,
+                  props.show.id,
                   "watchList"
                 );
               }}
@@ -79,7 +49,17 @@ const Card = (props) => {
               <FcLike /> Add to favorites
             </button>
           ) : (
-            <button onClick={removeFromStorage}>
+            <button
+              onClick={() => {
+                setAddedToWatchList(false);
+                props.addAndRemoveStorageFunc.remove(
+                  props.watchList,
+                  props.addToWatchList,
+                  props.show.id,
+                  "watchList"
+                );
+              }}
+            >
               <FcLike /> Remove from Favorites
             </button>
           )}

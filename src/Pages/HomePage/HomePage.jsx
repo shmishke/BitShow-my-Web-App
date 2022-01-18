@@ -32,6 +32,7 @@ const HomePage = (props) => {
         changeNumberOfCardsDisplaying={props.changeNumberOfCardsDisplaying}
         watchList={props.watchList}
         addToWatchList={props.addToWatchList}
+        addAndRemoveStorageFunc={props.addAndRemoveStorageFunc}
       />
     </>
   );

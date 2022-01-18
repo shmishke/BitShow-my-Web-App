@@ -26,6 +26,7 @@ const SmallCardlist = (props) => {
             changeRecentlyViewedShows={props.changeRecentlyViewedShows}
             watchList={props.watchList}
             addToWatchList={props.addToWatchList}
+            addAndRemoveStorageFunc={props.addAndRemoveStorageFunc}
           />
         );
       })}

@@ -16,11 +16,52 @@ function App() {
   const [watchList, addToWatchList] = useState(
     JSON.parse(window.localStorage.getItem("watchList"))
   );
+  const [addAndRemoveStorageFunc, setAddAndRemoveStorageFunc] = useState({});
+
+  const addToStorage = (clickedShows, setClickedShows, id, storageName) => {
+    if (clickedShows) {
+      const shows = [
+        Number(id),
+        ...clickedShows.filter((e) => e != Number(id)),
+      ];
+      setClickedShows(shows);
+      window.localStorage.setItem(storageName, JSON.stringify(shows));
+    } else {
+      window.localStorage.setItem(storageName, JSON.stringify([Number(id)]));
+      setClickedShows([Number(id)]);
+    }
+  };
+
+  const removeFromStorage = (
+    clickedShows,
+    setClickedShows,
+    id,
+    storageName
+  ) => {
+    if (clickedShows) {
+      const shows = JSON.parse(window.localStorage.getItem(storageName)).filter(
+        (e) => e !== Number(id)
+      );
+      if (shows.length === 0) {
+        setClickedShows(null);
+        window.localStorage.removeItem(storageName);
+      } else {
+        setClickedShows(shows);
+        window.localStorage.setItem(storageName, JSON.stringify(shows));
+      }
+    }
+  };
 
   useEffect(() => {
+    // window.localStorage.clear();
     fetch(`http://api.tvmaze.com/shows`)
       .then((res) => res.json())
       .then((res) => getFetchResult(res));
+
+    setAddAndRemoveStorageFunc({
+      add: addToStorage,
+      remove: removeFromStorage,
+    });
   }, []);
 
   return (
@@ -32,6 +73,7 @@ function App() {
               fetchResult={fetchResult}
               watchList={watchList}
               addToWatchList={addToWatchList}
+              addAndRemoveStorageFunc={addAndRemoveStorageFunc}
             />
             <div className="main">
               <Switch>
@@ -48,6 +90,7 @@ function App() {
                     changeRecentlyViewedShows={changeRecentlyViewedShows}
                     watchList={watchList}
                     addToWatchList={addToWatchList}
+                    addAndRemoveStorageFunc={addAndRemoveStorageFunc}
                   />
                 </Route>
                 <Route path="/show/:id">
@@ -57,6 +100,7 @@ function App() {
                     changeRecentlyViewedShows={changeRecentlyViewedShows}
                     watchList={watchList}
                     addToWatchList={addToWatchList}
+                    addAndRemoveStorageFunc={addAndRemoveStorageFunc}
                   />
                 </Route>
               </Switch>
@@ -67,6 +111,7 @@ function App() {
               changeRecentlyViewedShows={changeRecentlyViewedShows}
               watchList={watchList}
               addToWatchList={addToWatchList}
+              addAndRemoveStorageFunc={addAndRemoveStorageFunc}
             />
           </>
         )}

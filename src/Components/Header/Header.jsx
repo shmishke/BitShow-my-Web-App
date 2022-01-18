@@ -57,6 +57,7 @@ const Header = (props) => {
               fetchResult={props.fetchResult}
               watchList={props.watchList}
               addToWatchList={props.addToWatchList}
+              addAndRemoveStorageFunc={props.addAndRemoveStorageFunc}
             />
           </div>
         </div>

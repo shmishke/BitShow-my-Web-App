@@ -20,7 +20,6 @@ const SinglePage = (props) => {
   const [episodes, setEpisodes] = useState([]);
   const [background, setBackground] = useState();
   const [numOfCast, changeNumOfCast] = useState(8);
-
   const [imageSlice, changeImageSlice] = useState(0);
   const [imageSliceEnd, changeImageSliceEnd] = useState(4);
 
@@ -140,23 +139,12 @@ const SinglePage = (props) => {
                 <div className="add-to-watchlist">
                   <button
                     onClick={() => {
-                      if (props.watchList) {
-                        const shows = [
-                          Number(id),
-                          ...props.watchList.filter((e) => e !== Number(id)),
-                        ];
-                        props.addToWatchList(shows);
-                        window.localStorage.setItem(
-                          "watchList",
-                          JSON.stringify(shows)
-                        );
-                      } else {
-                        window.localStorage.setItem(
-                          "watchList",
-                          JSON.stringify([Number(id)])
-                        );
-                        props.addToWatchList([Number(id)]);
-                      }
+                      props.addAndRemoveStorageFunc.add(
+                        props.watchList,
+                        props.addToWatchList,
+                        id,
+                        "watchList"
+                      );
                     }}
                   >
                     Add to watchlist
@@ -307,6 +295,7 @@ const SinglePage = (props) => {
                 changeRecentlyViewedShows={props.changeRecentlyViewedShows}
                 watchList={props.watchList}
                 addToWatchList={props.addToWatchList}
+                addAndRemoveStorageFunc={props.addAndRemoveStorageFunc}
               />
             </div>
           )}

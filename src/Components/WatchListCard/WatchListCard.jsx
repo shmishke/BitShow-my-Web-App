@@ -15,21 +15,12 @@ const WatchListCard = (props) => {
           <h3>{props.show.name}</h3>
           <button
             onClick={() => {
-              if (props.watchList) {
-                const shows = JSON.parse(
-                  window.localStorage.getItem("watchList")
-                ).filter((e) => e !== props.show.id);
-                if (shows.length === 0) {
-                  props.addToWatchList(null);
-                  window.localStorage.removeItem("watchList");
-                } else {
-                  props.addToWatchList(shows);
-                  window.localStorage.setItem(
-                    "watchList",
-                    JSON.stringify(shows)
-                  );
-                }
-              }
+              props.addAndRemoveStorageFunc.remove(
+                props.watchList,
+                props.addToWatchList,
+                props.show.id,
+                "watchList"
+              );
             }}
           >
             x
