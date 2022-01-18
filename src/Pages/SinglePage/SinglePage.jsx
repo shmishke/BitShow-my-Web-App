@@ -8,7 +8,8 @@ import moment from "moment";
 import variables from "../../variables.module.scss";
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
-import { FaRegHeart } from "react-icons/fa";
+import { FaHeartBroken } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import OneEpisode from "../../Components/SingleEpisode.jsx/OneEpisode";
 import OnePerson from "../../Components/OnePerson/OnePerson";
 import SmallCardlist from "../../Components/SmallCardlist/SmallCardlist";
@@ -22,32 +23,14 @@ const SinglePage = (props) => {
   const [numOfCast, changeNumOfCast] = useState(8);
   const [imageSlice, changeImageSlice] = useState(0);
   const [imageSliceEnd, changeImageSliceEnd] = useState(4);
+  const [addedOrHoveredBtn, setAddedOrHoveredBtn] = useState({
+    added: false,
+    hovered: false,
+  });
 
   const { id } = useParams();
   const show = props.fetchResult.find((e) => e.id === Number(id));
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    changeImageSlice(0);
-    changeImageSliceEnd(4);
-    changeNumOfCast(8);
-
-    fetch(`http://api.tvmaze.com/shows/${id}/seasons`)
-      .then((res) => res.json())
-      .then((res) => setSeasons(res));
-    fetch(`http://api.tvmaze.com/shows/${id}/cast`)
-      .then((res) => res.json())
-      .then((res) => setCast(res));
-    fetch(`http://api.tvmaze.com/shows/${id}/crew`)
-      .then((res) => res.json())
-      .then((res) => setCrew(res));
-    fetch(`http://api.tvmaze.com/shows/${id}/episodes`)
-      .then((res) => res.json())
-      .then((res) => setEpisodes(res));
-    fetch(`https://api.tvmaze.com/shows/${id}/images`)
-      .then((res) => res.json())
-      .then((res) => setBackground(res));
-  }, [id]);
   const details = (det) => {
     return det.summary
       .replace("<p>", "")
@@ -96,6 +79,36 @@ const SinglePage = (props) => {
   let img = background
     ? background.find((e) => e.type === "background").resolutions.original.url
     : null;
+  console.log(props.watchList, id);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    changeImageSlice(0);
+    changeImageSliceEnd(4);
+    changeNumOfCast(8);
+
+    fetch(`http://api.tvmaze.com/shows/${id}/seasons`)
+      .then((res) => res.json())
+      .then((res) => setSeasons(res));
+    fetch(`http://api.tvmaze.com/shows/${id}/cast`)
+      .then((res) => res.json())
+      .then((res) => setCast(res));
+    fetch(`http://api.tvmaze.com/shows/${id}/crew`)
+      .then((res) => res.json())
+      .then((res) => setCrew(res));
+    fetch(`http://api.tvmaze.com/shows/${id}/episodes`)
+      .then((res) => res.json())
+      .then((res) => setEpisodes(res));
+    fetch(`https://api.tvmaze.com/shows/${id}/images`)
+      .then((res) => res.json())
+      .then((res) => setBackground(res));
+  }, [id]);
+
+  useEffect(() => {
+    if (props.watchList && props.watchList.includes(Number(id))) {
+      setAddedOrHoveredBtn({ added: true, hovered: false });
+    } else setAddedOrHoveredBtn({ added: false, hovered: false });
+  }, [props.watchList]);
 
   if (
     episodes.length !== 0 &&
@@ -136,8 +149,63 @@ const SinglePage = (props) => {
                   <MdOutlineLiveTv /> Premiered:
                   <h3> {moment(show.premiered).format("DD.MM.YYYY.")}</h3>
                 </div>
-                <div className="add-to-watchlist">
-                  <button
+                <div
+                  className="add-to-watchlist"
+                  onMouseEnter={() =>
+                    setAddedOrHoveredBtn({
+                      added: addedOrHoveredBtn.added,
+                      hovered: true,
+                    })
+                  }
+                  onMouseLeave={() =>
+                    setAddedOrHoveredBtn({
+                      added: addedOrHoveredBtn.added,
+                      hovered: false,
+                    })
+                  }
+                >
+                  {addedOrHoveredBtn.added ? (
+                    <button
+                      onClick={() => {
+                        props.addAndRemoveStorageFunc.remove(
+                          props.watchList,
+                          props.addToWatchList,
+                          id,
+                          "watchList"
+                        );
+                        setAddedOrHoveredBtn({ added: false, hovered: false });
+                      }}
+                    >
+                      {addedOrHoveredBtn.hovered ? (
+                        <p>
+                          Remove from watchlist <FaHeartBroken />
+                        </p>
+                      ) : (
+                        <p>
+                          Added to watchlist
+                          <FaHeart />
+                        </p>
+                      )}
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        props.addAndRemoveStorageFunc.add(
+                          props.watchList,
+                          props.addToWatchList,
+                          id,
+                          "watchList"
+                        );
+                        setAddedOrHoveredBtn({ added: true, hovered: false });
+                      }}
+                    >
+                      <p>
+                        {" "}
+                        add to watchList <FaHeart />
+                      </p>
+                    </button>
+                  )}
+                  {/* <button
                     onClick={() => {
                       props.addAndRemoveStorageFunc.add(
                         props.watchList,
@@ -151,7 +219,7 @@ const SinglePage = (props) => {
                   </button>
                   <div className="heart">
                     <FaRegHeart />
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="seasons-episodes">
