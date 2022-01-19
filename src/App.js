@@ -74,6 +74,8 @@ function App() {
               watchList={watchList}
               addToWatchList={addToWatchList}
               addAndRemoveStorageFunc={addAndRemoveStorageFunc}
+              recentlyViewedShows={recentlyViewedShows}
+              changeRecentlyViewedShows={changeRecentlyViewedShows}
             />
             <div className="main">
               <Switch>

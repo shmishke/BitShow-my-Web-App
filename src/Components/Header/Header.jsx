@@ -78,6 +78,8 @@ const Header = (props) => {
               watchList={props.watchList}
               addToWatchList={props.addToWatchList}
               addAndRemoveStorageFunc={props.addAndRemoveStorageFunc}
+              recentlyViewedShows={props.recentlyViewedShows}
+              changeRecentlyViewedShows={props.changeRecentlyViewedShows}
             />
           </div>
         </div>
