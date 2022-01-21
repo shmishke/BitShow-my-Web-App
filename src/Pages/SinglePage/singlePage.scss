@@ -1,11 +1,11 @@
 @import "../../variables.module.scss";
 
 .single-page-container {
-  background-color: $mainColor;
-  color: $textColor;
+  background-color: $background;
+  color: $mainColor;
 
   .top-of-single-page {
-    background-color: $mainColor;
+    background-color: $textColor;
     height: calc(100vh - 47px - 65px);
     background-position: center;
     background-repeat: no-repeat;
@@ -84,25 +84,6 @@
               }
             }
           }
-          // button {
-          //   width: 80%;
-          //   background-color: transparent;
-          //   height: 100%;
-          //   font-size: 1.5rem;
-          //   color: $textColor;
-          //   border: 0;
-          // }
-
-          // .heart {
-          //   width: 25%;
-          //   height: 100%;
-          //   border: 0;
-          //   display: flex;
-          //   justify-content: center;
-          //   align-items: center;
-          //   font-size: 2rem;
-          //   margin: 0 auto;
-          // }
         }
       }
       .images-container {
@@ -207,9 +188,11 @@
 
   .title {
     text-align: center;
-    font-size: 2rem;
+    font-size: 2.3rem;
     margin: 2rem 0;
     flex-grow: 0;
+    font-weight: 700;
+    color: $mainColor;
   }
   .episodes {
     display: flex;
@@ -235,8 +218,8 @@
         text-align: center;
         align-self: center;
         width: 18%;
-        background-color: $textColor;
-        color: $mainColor;
+        background-color: $mainColor;
+        color: $orange;
         font-size: 1.5rem;
         -webkit-clip-path: polygon(
           50% 0%,
@@ -260,11 +243,12 @@
 
       .cast {
         // background-color: #593d3b;
-        color: $textColor;
-        border: 1px solid $textColor;
+        color: $mainColor;
+        border: 3px solid $mainColor;
         border-radius: 20px;
         display: flex;
         flex-wrap: wrap;
+        background-color: $gray;
         padding: 10px 15px;
       }
     }

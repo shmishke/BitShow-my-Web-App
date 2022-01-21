@@ -20,7 +20,7 @@ const WatchListCard = (props) => {
     fetch(`http://api.tvmaze.com/shows/${props.show.id}/seasons`)
       .then((res) => res.json())
       .then((res) => setSeasonsAndEpisodes(res));
-  }, []);
+  }, [props.watchList]);
   console.log(props.show);
   return (
     <div className="watchlist-single-card">
@@ -41,20 +41,14 @@ const WatchListCard = (props) => {
         </div>
         <div className="watchlist-main">
           <div className="seasons-episodes">
-            <p>Seasons</p>
-            <div className="seasons-episodes-number">
-              <div>{seasonsAndEpisodes.length}</div>
-              <span>
-                <MdLocalMovies />
-              </span>
-              <div>
-                {seasonsAndEpisodes.reduce((acc, e) => {
-                  const all = acc + Number(e.episodeOrder);
-                  return all;
-                }, 0)}
-              </div>
-            </div>
-            <p>Episodes</p>
+            <p>Seasons {seasonsAndEpisodes.length}</p>
+            <p>
+              Episodes{" "}
+              {seasonsAndEpisodes.reduce((acc, e) => {
+                const all = acc + Number(e.episodeOrder);
+                return all;
+              }, 0)}
+            </p>
           </div>
           <div className="watchlist-show-info">
             <div className="watchlist-show-genre">

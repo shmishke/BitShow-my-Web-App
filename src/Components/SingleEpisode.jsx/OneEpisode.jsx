@@ -17,11 +17,10 @@ const OneEpisode = (props) => {
         </div>
       </h3>
       <h4>
-        Season:{props.e.season} / Episode:
-        {props.e.number}
+        Season {props.e.season} / Episode {props.e.number}
       </h4>
       <div className="episode-details">
-        <h3>Episode details :</h3>
+        <h3>Episode details </h3>
         {props.e.summary ? <p>{props.details(props.e)}</p> : null}
       </div>
       <div className="episode-bottom">

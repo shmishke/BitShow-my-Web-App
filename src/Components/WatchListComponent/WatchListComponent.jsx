@@ -8,12 +8,15 @@ const WatchListComponent = (props) => {
   return (
     <div className="page-container">
       <div className="watchlist-container">
-        <h3>Watchlist:</h3>
+        <div className="title">
+          <h3>Watchlist</h3>
+        </div>
         {props.watchList ? (
           <div className="list">
-            {shows().map((e) => (
+            {shows().map((e, i) => (
               <WatchListCard
                 show={e}
+                key={i}
                 fetchResult={props.fetchResult}
                 watchList={props.watchList}
                 addToWatchList={props.addToWatchList}
