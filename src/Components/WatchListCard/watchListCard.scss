@@ -2,10 +2,11 @@
 
 .watchlist-single-card {
   display: flex;
-  background-color: $mainColor;
-  color: $textColor;
+  background-color: white;
+  color: $mainColor;
   width: 100%;
   margin-bottom: 1.3rem;
+  margin-top: 1rem;
 
   .watchlist-img {
     flex-grow: 0;

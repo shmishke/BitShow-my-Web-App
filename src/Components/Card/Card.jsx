@@ -1,5 +1,5 @@
 import "./card.scss";
-import { FcLike } from "react-icons/fc";
+import { IoHeart, IoHeartDislike } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react/cjs/react.development";
 
@@ -29,7 +29,7 @@ const Card = (props) => {
           >
             <img src={props.show.image.original} alt={props.show.name} />
             <div className="card-name">
-              <h1>{props.show.name}</h1>
+              <div>{props.show.name}</div>
             </div>
           </div>
         </Link>
@@ -46,10 +46,14 @@ const Card = (props) => {
                 );
               }}
             >
-              <FcLike /> Add to favorites
+              Add to favorites
+              <div className="btn-icon">
+                <IoHeart />
+              </div>
             </button>
           ) : (
             <button
+              className="remove"
               onClick={() => {
                 setAddedToWatchList(false);
                 props.addAndRemoveStorageFunc.remove(
@@ -60,7 +64,10 @@ const Card = (props) => {
                 );
               }}
             >
-              <FcLike /> Remove from Favorites
+              Remove from Favorites{" "}
+              <div className="btn-icon">
+                <IoHeartDislike />
+              </div>
             </button>
           )}
 

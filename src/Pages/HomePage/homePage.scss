@@ -1,9 +1,10 @@
+@import "../../variables.module.scss";
 .top-of-page {
   h1 {
-    color: wheat;
+    color: $textColor;
     text-align: center;
   }
   width: 100%;
-  background-color: #161032;
+  background-color: $mainColor;
   padding-bottom: 2rem;
 }

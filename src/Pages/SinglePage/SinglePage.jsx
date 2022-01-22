@@ -73,7 +73,17 @@ const SinglePage = (props) => {
     });
     const all = [];
     genres.forEach((e) => all.push(...e));
-    return all.filter((e, i, arr) => i === arr.indexOf(e));
+    const allShowsToDisplay = all.filter((e, i, arr) => i === arr.indexOf(e));
+    if (!props.recentlyViewedShows) return allShowsToDisplay;
+    else {
+      const seenShows = allShowsToDisplay.filter((e) =>
+        props.recentlyViewedShows.includes(e.id)
+      );
+      const restOfShows = allShowsToDisplay.filter(
+        (e) => !props.recentlyViewedShows.includes(e.id)
+      );
+      return [...restOfShows, ...seenShows];
+    }
   };
 
   const moreShows = showMoreShows(show.genres);
@@ -81,7 +91,6 @@ const SinglePage = (props) => {
   let img = background
     ? background.find((e) => e.type === "background").resolutions.original.url
     : null;
-  console.log(props.watchList, id);
 
   useEffect(() => {
     window.scrollTo(0, 0);

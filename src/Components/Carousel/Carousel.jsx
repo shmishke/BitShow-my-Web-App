@@ -32,6 +32,7 @@ const Carousel = (props) => {
       .then((res) => res.json())
       .then((res) => console.log(res));
   }, [showId]);
+  console.log(bestRatedShows);
 
   return (
     <>

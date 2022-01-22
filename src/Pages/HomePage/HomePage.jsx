@@ -6,14 +6,14 @@ import DisplayNCards from "../../Components/DisplayNCards/DisplayNCards";
 const HomePage = (props) => {
   return (
     <>
-      {/* <div className="top-of-page">
+      <div className="top-of-page">
         <h1>Top 10 best-rated shows</h1>
         {props.fetchResult && (
           <div className="carousel">
             <Carousel fetchResult={props.fetchResult} />
           </div>
         )}
-      </div> */}
+      </div>
       <DisplayNCards
         fetchResult={props.fetchResult}
         changeActivePage={props.changeActivePage}
