@@ -1,47 +1,19 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import moment from "moment";
 import OneEpisode from "../../Components/SingleEpisode.jsx/OneEpisode";
 import OnePerson from "../../Components/OnePerson/OnePerson";
 import SmallCardlist from "../../Components/SmallCardlist/SmallCardlist";
 import "./singlePage.scss";
-import { RiStarSLine } from "react-icons/ri";
-import { GiStopwatch } from "react-icons/gi";
-import { MdOutlineLiveTv } from "react-icons/md";
-import {
-  FaAngleLeft,
-  FaAngleRight,
-  FaHeartBroken,
-  FaHeart,
-  FaRegHeart,
-} from "react-icons/fa";
+import DisplayShowInfo from "../../Components/DisplayShowInfo/DisplayShowInfo";
 
 const SinglePage = (props) => {
-  const [seasons, setSeasons] = useState([]);
   const [cast, setCast] = useState([]);
-  const [crew, setCrew] = useState([]);
   const [episodes, setEpisodes] = useState([]);
   const [background, setBackground] = useState();
   const [numOfCast, changeNumOfCast] = useState(8);
-  const [imageSlice, changeImageSlice] = useState(0);
-  const [imageSliceEnd, changeImageSliceEnd] = useState(4);
-  const [addedOrHoveredBtn, setAddedOrHoveredBtn] = useState({
-    added: false,
-    hovered: false,
-  });
 
   const { id } = useParams();
   const show = props.fetchResult.find((e) => e.id === Number(id));
-
-  const details = (det) => {
-    return det.summary
-      .replace("<p>", "")
-      .replace("</p>", "")
-      .replace("</b>", "")
-      .replace("<b>", "")
-      .replace("<i>", "")
-      .replace("</i>", "");
-  };
 
   const bestRatedEpisodes = [...episodes]
     .sort((a, b) => {
@@ -63,7 +35,7 @@ const SinglePage = (props) => {
     return par.slice(0, numOfCast);
   };
 
-  const allGenresOfShow = [];
+  const allGenresOfShow = show.genres;
 
   const showMoreShows = (arr) => {
     const genres = arr.map((e) => {
@@ -94,19 +66,13 @@ const SinglePage = (props) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    changeImageSlice(0);
-    changeImageSliceEnd(4);
+
     changeNumOfCast(8);
 
-    fetch(`http://api.tvmaze.com/shows/${id}/seasons`)
-      .then((res) => res.json())
-      .then((res) => setSeasons(res));
     fetch(`http://api.tvmaze.com/shows/${id}/cast`)
       .then((res) => res.json())
       .then((res) => setCast(res));
-    fetch(`http://api.tvmaze.com/shows/${id}/crew`)
-      .then((res) => res.json())
-      .then((res) => setCrew(res));
+
     fetch(`http://api.tvmaze.com/shows/${id}/episodes`)
       .then((res) => res.json())
       .then((res) => setEpisodes(res));
@@ -115,19 +81,7 @@ const SinglePage = (props) => {
       .then((res) => setBackground(res));
   }, [id]);
 
-  useEffect(() => {
-    if (props.watchList && props.watchList.includes(Number(id))) {
-      setAddedOrHoveredBtn({ added: true, hovered: false });
-    } else setAddedOrHoveredBtn({ added: false, hovered: false });
-  }, [props.watchList]);
-
-  if (
-    episodes.length !== 0 &&
-    cast.length !== 0 &&
-    seasons.length !== 0 &&
-    crew.length !== 0 &&
-    background
-  )
+  if (episodes.length !== 0 && cast.length !== 0 && background)
     return (
       <div className="single-page-container">
         <h2>{show.name} </h2>
@@ -141,191 +95,19 @@ const SinglePage = (props) => {
           }}
         >
           /
-          <div className="image-info">
-            <div className="image">
-              <img src={show.image.original} alt="#" />
-            </div>
-            <div className="info">
-              <div className="top">
-                <div>
-                  <RiStarSLine /> Average Rating:
-                  <h3>{show.rating.average} </h3>
-                </div>
-                <div>
-                  <GiStopwatch /> Average Runtime:
-                  <h3>{show.averageRuntime} min</h3>
-                </div>
-                <div>
-                  <MdOutlineLiveTv /> Premiered:
-                  <h3> {moment(show.premiered).format("DD.MM.YYYY.")}</h3>
-                </div>
-                <div
-                  className="add-to-watchlist"
-                  onMouseEnter={() =>
-                    setAddedOrHoveredBtn({
-                      added: addedOrHoveredBtn.added,
-                      hovered: true,
-                    })
-                  }
-                  onMouseLeave={() =>
-                    setAddedOrHoveredBtn({
-                      added: addedOrHoveredBtn.added,
-                      hovered: false,
-                    })
-                  }
-                >
-                  {addedOrHoveredBtn.added ? (
-                    <div
-                      className="add-to-watchlist-btn"
-                      onClick={() => {
-                        props.addAndRemoveStorageFunc.remove(
-                          props.watchList,
-                          props.addToWatchList,
-                          id,
-                          "watchList"
-                        );
-                        setAddedOrHoveredBtn({ added: false, hovered: false });
-                      }}
-                    >
-                      {addedOrHoveredBtn.hovered ? (
-                        <div className="add-to-watch-list-text">
-                          Remove from watchlist
-                          <div className="heart">
-                            <FaHeartBroken />
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="add-to-watch-list-text">
-                          Added to watchlist{" "}
-                          <div className="heart">
-                            <FaHeart />
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <div
-                      className="add-to-watchlist-btn"
-                      onClick={() => {
-                        props.addAndRemoveStorageFunc.add(
-                          props.watchList,
-                          props.addToWatchList,
-                          id,
-                          "watchList"
-                        );
-                        setAddedOrHoveredBtn({ added: true, hovered: false });
-                      }}
-                    >
-                      <div className="add-to-watch-list-text">
-                        Add to watchlist
-                        <div className="heart">
-                          <FaRegHeart />
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="seasons-episodes">
-                <h3>
-                  {seasons.length == 1
-                    ? "One season"
-                    : `Seasons (${seasons.length})`}
-                </h3>
-                <span> {"</>"} </span>
-                <h3>
-                  Episodes (
-                  {seasons.reduce((acc, e) => {
-                    const all = acc + Number(e.episodeOrder);
-                    return all;
-                  }, 0)}
-                  )
-                </h3>
-              </div>
-              {episodes[0].image && (
-                <div className="images-container">
-                  <h3>Images</h3>
-                  <div className="images">
-                    <button
-                      onClick={() => {
-                        changeImageSlice(imageSlice - 4);
-                        changeImageSliceEnd(imageSliceEnd - 4);
-                      }}
-                      disabled={imageSlice === 0}
-                    >
-                      <FaAngleLeft />
-                    </button>
-                    {episodes.slice(imageSlice, imageSliceEnd).map((e) => {
-                      return (
-                        <div className="single-image">
-                          <img src={e.image.original} alt="" />
-                        </div>
-                      );
-                    })}
-                    <button
-                      onClick={() => {
-                        changeImageSlice(imageSlice + 4);
-                        changeImageSliceEnd(imageSliceEnd + 4);
-                      }}
-                      disabled={imageSliceEnd >= episodes.length}
-                    >
-                      <FaAngleRight />
-                    </button>
-                  </div>
-                </div>
-              )}
-              <h3>Show Details</h3>
-              <div className="details">
-                <p>{details(show)}</p>
-              </div>
-              {show.genres.length !== 0 && (
-                <>
-                  <div className="genres-container">
-                    <h3>Genres:</h3>
-                    <div className="genres">
-                      {show.genres.map((e) => {
-                        allGenresOfShow.push(e);
-                        return <h4>{e}</h4>;
-                      })}
-                    </div>
-                  </div>
-                </>
-              )}
-              <div className="stars-creator">
-                <div className="stars">
-                  {cast.length > 1 ? (
-                    <h3>
-                      Starring: {cast[0].person.name} / {cast[1].person.name}
-                    </h3>
-                  ) : (
-                    <h3>Starring: {cast[0].person.name}</h3>
-                  )}
-                </div>
-                <div className="creator">
-                  {crew.find((e) => e.type === "Creator") ? (
-                    <h3>
-                      Created by:
-                      {crew.find((e) => e.type === "Creator").person.name}
-                    </h3>
-                  ) : (
-                    <h3>
-                      Produced by:
-                      {
-                        crew.find((e) => e.type === "Executive Producer").person
-                          .name
-                      }
-                    </h3>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
+          <DisplayShowInfo
+            show={show}
+            watchList={props.watchList}
+            addToWatchList={props.addToWatchList}
+            addAndRemoveStorageFunc={props.addAndRemoveStorageFunc}
+            details={props.details}
+          />
         </div>
         <div className="main">
           <h3 className="title">Best Rated episodes</h3>
           <div className="episodes">
             {bestRatedEpisodes.slice(0, 3).map((e) => (
-              <OneEpisode e={e} details={details} />
+              <OneEpisode e={e} details={props.details} />
             ))}
           </div>
           <div className="cast-and-recent-episode">
@@ -354,11 +136,11 @@ const SinglePage = (props) => {
             <div className="recent-episodes">
               <h3 className="title">Most recent episodes</h3>
               {mostRecentEpisodes.slice(0, 3).map((e) => (
-                <OneEpisode e={e} details={details} />
+                <OneEpisode e={e} details={props.details} />
               ))}
             </div>
           </div>
-          {allGenresOfShow.length >= 1 && (
+          {show.genres.length >= 1 && (
             <div className="more-by-genre">
               <h3 className="title">Similar Shows</h3>
               <SmallCardlist

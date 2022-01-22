@@ -10,18 +10,26 @@ const HomePage = (props) => {
         <h1>Top 10 best-rated shows</h1>
         {props.fetchResult && (
           <div className="carousel">
-            <Carousel fetchResult={props.fetchResult} />
+            <Carousel
+              fetchResult={props.fetchResult}
+              watchList={props.watchList}
+              addToWatchList={props.addToWatchList}
+              addAndRemoveStorageFunc={props.addAndRemoveStorageFunc}
+              details={props.details}
+            />
           </div>
         )}
-      </div>
-      <DisplayNCards
-        fetchResult={props.fetchResult}
-        changeActivePage={props.changeActivePage}
-        changeNumberOfCardsDisplaying={props.changeNumberOfCardsDisplaying}
-        numberOfCardsDisplaying={props.numberOfCardsDisplaying}
-      />
-      <h2>What To Watch</h2>
 
+        {/* <DisplayNCards
+          fetchResult={props.fetchResult}
+          changeActivePage={props.changeActivePage}
+          changeNumberOfCardsDisplaying={props.changeNumberOfCardsDisplaying}
+          numberOfCardsDisplaying={props.numberOfCardsDisplaying}
+        /> */}
+        <div className="what-to-watch">
+          <h2>What To Watch</h2>
+        </div>
+      </div>
       <CardList
         fetchResult={props.fetchResult}
         recentlyViewedShows={props.recentlyViewedShows}

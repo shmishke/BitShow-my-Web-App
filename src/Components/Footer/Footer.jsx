@@ -49,7 +49,7 @@ const Footer = (props) => {
             props.addToWatchList(null);
           }}
         >
-          aewee
+          Clear Local Storage
         </button>
       </div>
     </>

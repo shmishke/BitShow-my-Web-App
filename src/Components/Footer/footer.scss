@@ -31,4 +31,14 @@
       display: none;
     }
   }
+
+  button {
+    background-color: $mainColor;
+    border: 1px solid $textColor;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin: 1rem 0;
+    font-weight: 700;
+    color: $textColor;
+  }
 }

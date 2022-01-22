@@ -5,6 +5,7 @@ import { FcLike } from "react-icons/fc";
 import { TiStar } from "react-icons/ti";
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
+import DisplayShowInfo from "../../Components/DisplayShowInfo/DisplayShowInfo";
 
 const Carousel = (props) => {
   const [carouselShow, changeCarouselShow] = useState(0);
@@ -17,14 +18,6 @@ const Carousel = (props) => {
     })
     .slice(0, 10);
 
-  const details = bestRatedShows[carouselShow].summary
-    .replace("<p>", "")
-    .replace("</p>", "")
-    .replace("</b>", "")
-    .replace("<b>", "")
-    .replace("<i>", "")
-    .replace("</i>", "");
-
   const showId = bestRatedShows[carouselShow].id;
 
   useEffect(() => {
@@ -35,55 +28,41 @@ const Carousel = (props) => {
   console.log(bestRatedShows);
 
   return (
-    <>
-      <div className="carousel-container">
-        <div className="carousel-img">
-          <img src={bestRatedShows[carouselShow].image.original} alt="asd" />
-        </div>
-        <div className="carousel-info">
-          <button>
-            <FcLike /> Add to Watch Later
-          </button>
-          <div className="title-and-rating">
-            <h2>{bestRatedShows[carouselShow].name}</h2>
-            <div className="rating">
-              <TiStar />
-              {bestRatedShows[carouselShow].rating.average}
-            </div>
-          </div>
-          <div className="carousel-details">
-            <h3>Show details</h3>
-            <p> {details} </p>
-          </div>
-        </div>
-        <div className="btn1">
-          {carouselShow !== 0 && (
-            <>
-              <button
-                onClick={() => {
-                  if (carouselShow > 0) changeCarouselShow(carouselShow - 1);
-                }}
-              >
-                <FaAngleLeft />
-              </button>
-            </>
-          )}
-        </div>
-        <div className="btn2">
-          {carouselShow < 9 && (
-            <>
-              <button
-                onClick={() => {
-                  if (carouselShow < 10) changeCarouselShow(carouselShow + 1);
-                }}
-              >
-                <FaAngleRight />
-              </button>
-            </>
-          )}
-        </div>
+    <div className="carousel-container">
+      <DisplayShowInfo
+        show={bestRatedShows[carouselShow]}
+        watchList={props.watchList}
+        addToWatchList={props.addToWatchList}
+        addAndRemoveStorageFunc={props.addAndRemoveStorageFunc}
+        details={props.details}
+      />
+      <div className="btn1">
+        {carouselShow !== 0 && (
+          <>
+            <button
+              onClick={() => {
+                if (carouselShow > 0) changeCarouselShow(carouselShow - 1);
+              }}
+            >
+              <FaAngleLeft />
+            </button>
+          </>
+        )}
       </div>
-    </>
+      <div className="btn2">
+        {carouselShow < 9 && (
+          <>
+            <button
+              onClick={() => {
+                if (carouselShow < 10) changeCarouselShow(carouselShow + 1);
+              }}
+            >
+              <FaAngleRight />
+            </button>
+          </>
+        )}
+      </div>
+    </div>
   );
 };
 

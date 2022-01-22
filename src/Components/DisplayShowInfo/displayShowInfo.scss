@@ -1,0 +1,173 @@
+@import "../../variables.module.scss";
+.image-info {
+  margin: 0 auto;
+  border-radius: 20px;
+  display: flex;
+  background-color: $secondaryColor;
+  margin-top: 4%;
+  height: 75%;
+  font-size: 1.2rem;
+  width: 90%;
+  padding: 15px 10px;
+  color: $textColor;
+
+  .image {
+    margin: 0 auto;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .info {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .top {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+
+      div {
+        width: 100%;
+        border: 1px solid $textColor;
+        border-top: 0;
+        border-left: 0;
+        padding: 0 10px;
+
+        h3 {
+          padding-bottom: 5px;
+        }
+      }
+
+      .add-to-watchlist {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        .add-to-watchlist-btn {
+          align-self: center;
+          border: 0;
+          .add-to-watch-list-text {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-grow: 1;
+            border: 0;
+
+            .heart {
+              border: 0;
+              width: 15%;
+              text-align: center;
+              font-size: 2rem;
+              flex-shrink: 1;
+            }
+          }
+        }
+      }
+    }
+    .images-container {
+      width: 100%;
+      flex-grow: 1;
+      margin: 1rem 0 1.5rem 0;
+
+      button {
+        height: 50px;
+        display: flex;
+        align-items: center;
+        font-size: 1.3rem;
+        border: 1px solid $textColor;
+        color: $textColor;
+        align-self: center;
+        border-radius: 50%;
+        padding: 5px 10px;
+        background-color: transparent;
+      }
+
+      .images {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: space-between;
+        flex-grow: 0;
+
+        .single-image {
+          width: 20%;
+          height: 150px;
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+    .show-name {
+      margin: 3rem;
+      a {
+        text-decoration: none;
+        :hover {
+          color: $mainColor;
+        }
+      }
+    }
+    .genres-container {
+      display: flex;
+      align-items: center;
+      padding: 10px 0 10px 0;
+      border-top: 1px solid $textColor;
+      border-bottom: 1px solid $textColor;
+
+      h3 {
+        border-right: 1px solid $textColor;
+        padding-right: 10%;
+      }
+      .genres {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: space-around;
+
+        h4 {
+          padding: 5px 1rem;
+          border-radius: 20px;
+          border: 1px solid $textColor;
+        }
+      }
+    }
+    .seasons-episodes {
+      width: 50%;
+      margin: 0 auto;
+      display: flex;
+      flex-grow: 0;
+      justify-content: space-evenly;
+      margin-top: 2rem;
+    }
+    .details {
+      // padding-bottom: 1rem;
+      flex-grow: 1;
+      overflow-y: auto;
+      max-height: 60%;
+      padding-bottom: 1rem;
+      margin-top: 0.5rem;
+      padding-right: 0.3rem;
+    }
+    .stars-creator {
+      display: flex;
+
+      .stars,
+      .creator {
+        width: 50%;
+        // border: 1px solid red;
+        padding-top: 0.7rem;
+        // border-right: 1px solid $textColor;
+        text-align: center;
+        height: 100%;
+      }
+      .stars {
+        border-right: 1px solid $textColor;
+        color: wh;
+      }
+    }
+  }
+}

@@ -5,34 +5,20 @@
   height: 60vh;
   background-color: #29524a;
   margin: 0 auto;
-  display: flex;
+  // display: flex;
   position: relative;
-  margin-top: 30px;
+  // margin-top: 30px;
   border-radius: 15px;
 
-  .carousel-img {
-    width: 40%;
-    display: flex;
-    justify-content: center;
-
-    img {
-      height: 100%;
-    }
+  button {
+    width: auto;
+    height: auto;
+    font-size: 20px;
+    background-color: #29524a;
+    color: wheat;
+    border: 0;
   }
 
-  .carousel-info {
-    width: 60%;
-    border: 1px solid black;
-
-    button {
-      width: auto;
-      height: auto;
-      font-size: 20px;
-      background-color: #29524a;
-      color: wheat;
-      border: 0;
-    }
-  }
   .btn1 {
     position: absolute;
     left: 0%;
@@ -43,12 +29,24 @@
     right: 0%;
     top: 50%;
   }
-  button {
+  .btn1 button,
+  .btn2 button {
     width: 40px;
     height: 30px;
     background-color: $mainColor;
     font-size: 30px;
     border: 0;
     color: $secondaryColor;
+  }
+  .image-info {
+    height: 100%;
+    width: 100%;
+
+    .images-container {
+      display: none;
+    }
+    .details {
+      padding-right: 2rem;
+    }
   }
 }

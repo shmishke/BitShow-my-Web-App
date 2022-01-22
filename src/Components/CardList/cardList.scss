@@ -1,3 +1,51 @@
+@import "../../variables.module.scss";
+
+.cardlist-settings {
+  width: 100%;
+  background-color: $mainColor;
+  color: $textColor;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 2%;
+
+  select {
+    background-color: $mainColor;
+    border: 0;
+    border-left: 1px solid $textColor;
+    color: $textColor;
+    margin-left: 1rem;
+  }
+
+  .search {
+    display: flex;
+    flex-grow: 0;
+
+    .icon {
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 0.3rem;
+    }
+    input {
+      border: 0;
+      // border-right: 1px solid $textColor;
+      border-bottom: 1px solid $textColor;
+      background-color: $mainColor;
+      color: $textColor;
+    }
+  }
+
+  .pagination-div {
+    width: 100%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+  }
+}
+
 .card-list {
   display: flex;
   flex-wrap: wrap;
@@ -21,5 +69,15 @@
     input {
       height: 100%;
     }
+  }
+}
+.bottom-of-page {
+  width: 100%;
+  background-color: $mainColor;
+  display: flex;
+  justify-content: center;
+  .pagination {
+    margin: 0;
+    padding-top: 1.5rem;
   }
 }

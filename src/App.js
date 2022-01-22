@@ -18,6 +18,16 @@ function App() {
   );
   const [addAndRemoveStorageFunc, setAddAndRemoveStorageFunc] = useState({});
 
+  const details = (det) => {
+    return det.summary
+      .replace("<p>", "")
+      .replace("</p>", "")
+      .replace("</b>", "")
+      .replace("<b>", "")
+      .replace("<i>", "")
+      .replace("</i>", "");
+  };
+
   const addToStorage = (clickedShows, setClickedShows, id, storageName) => {
     if (clickedShows) {
       const shows = [
@@ -93,6 +103,7 @@ function App() {
                     watchList={watchList}
                     addToWatchList={addToWatchList}
                     addAndRemoveStorageFunc={addAndRemoveStorageFunc}
+                    details={details}
                   />
                 </Route>
                 <Route path="/show/:id">
@@ -103,6 +114,7 @@ function App() {
                     watchList={watchList}
                     addToWatchList={addToWatchList}
                     addAndRemoveStorageFunc={addAndRemoveStorageFunc}
+                    details={details}
                   />
                 </Route>
               </Switch>

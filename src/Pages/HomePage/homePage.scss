@@ -8,3 +8,21 @@
   background-color: $mainColor;
   padding-bottom: 2rem;
 }
+.what-to-watch {
+  width: 100%;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  margin-top: 3rem;
+  background-color: $textColor;
+  font-size: 1.2rem;
+
+  h2 {
+    display: inline-block;
+    color: $textColor;
+    padding: 0 4rem 0 2%;
+    background-color: $mainColor;
+    -webkit-clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
+  }
+}
