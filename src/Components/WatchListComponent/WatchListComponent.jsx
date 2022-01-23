@@ -27,7 +27,7 @@ const WatchListComponent = (props) => {
             ))}
           </div>
         ) : (
-          <p>search list empty</p>
+          <p className="empty">Watchlist empty.</p>
         )}
       </div>
     </div>

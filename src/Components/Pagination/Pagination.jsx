@@ -17,27 +17,28 @@ const Pagination = (props) => {
         <>
           <div className="no-hover">
             <button
-              style={props.activePage === 0 ? { display: "none" } : null}
+              className="pointer"
+              style={props.activePage === 0 ? { visibility: "hidden " } : null}
               onClick={() => props.changeActivePage(props.activePage - 1)}
             >
               {"<"}
             </button>
           </div>
           <button
-            className={props.activePage === 0 ? "current" : null}
+            className={props.activePage === 0 ? "current pointer" : "pointer"}
             onClick={() => props.changeActivePage(0)}
           >
             1
           </button>
           <button
-            className={props.activePage === 1 ? "current" : null}
+            className={props.activePage === 1 ? "current pointer" : "pointer"}
             onClick={() => props.changeActivePage(1)}
           >
             2
           </button>
           {props.fetchResult.length > 2 * props.numberOfCardsDisplaying && (
             <button
-              className={props.activePage === 2 ? "current" : null}
+              className={props.activePage === 2 ? "current pointer" : "pointer"}
               onClick={() => props.changeActivePage(2)}
             >
               3
@@ -45,14 +46,19 @@ const Pagination = (props) => {
           )}
           {props.fetchResult.length > 3 * props.numberOfCardsDisplaying && (
             <button
-              className={props.activePage === 3 ? "current" : null}
+              className={props.activePage === 3 ? "current pointer" : "pointer"}
               onClick={() => props.changeActivePage(3)}
             >
               4
             </button>
           )}
           {props.fetchResult.length > 4 * props.numberOfCardsDisplaying && (
-            <button onClick={() => props.changeActivePage(4)}>5</button>
+            <button
+              className="pointer"
+              onClick={() => props.changeActivePage(4)}
+            >
+              5
+            </button>
           )}
           {props.fetchResult.length >= 5 * props.numberOfCardsDisplaying && (
             <>
@@ -60,6 +66,7 @@ const Pagination = (props) => {
                 <button>...</button>
               </div>
               <button
+                className="pointer"
                 onClick={() => {
                   props.changeActivePage(lastActivePage);
                 }}
@@ -70,8 +77,9 @@ const Pagination = (props) => {
               </button>
             </>
           )}
-          <div className="no-hover">
+          <div className="no-hover ">
             <button
+              className="pointer"
               disabled={
                 props.numberOfCardsDisplaying * props.activePage +
                   props.numberOfCardsDisplaying >=
@@ -88,6 +96,7 @@ const Pagination = (props) => {
         <>
           <div className="no-hover">
             <button
+              className="pointer"
               disabled={props.activePage === 0}
               onClick={() => {
                 if (props.activePage <= 4) {
@@ -107,6 +116,7 @@ const Pagination = (props) => {
           </div>
 
           <button
+            className="pointer"
             onClick={() => {
               props.changeActivePage(0);
               changeButton1(4);
@@ -120,6 +130,7 @@ const Pagination = (props) => {
             <button>...</button>
           </div>
           <button
+            className="pointer"
             onClick={() => {
               props.changeActivePage(props.activePage - 1);
               changeButton1(button1 - 1);
@@ -134,8 +145,9 @@ const Pagination = (props) => {
           >
             {button1}
           </button>
-          <button className={"current"}>{button2}</button>
+          <button className={"current pointer"}>{button2}</button>
           <button
+            className="pointer"
             onClick={() => {
               if (props.activePage <= 4) {
                 changeButton1(4);
@@ -154,6 +166,7 @@ const Pagination = (props) => {
             <button>...</button>
           </div>
           <button
+            className="pointer"
             onClick={() => {
               props.changeActivePage(lastActivePage);
             }}
@@ -164,6 +177,7 @@ const Pagination = (props) => {
           </button>
           <div className="no-hover">
             <button
+              className="pointer"
               disabled={props.activePage === lastActivePage}
               onClick={() => {
                 changeButton1(button1 + 1);
@@ -181,6 +195,7 @@ const Pagination = (props) => {
         <>
           <div className="no-hover">
             <button
+              className="pointer"
               onClick={() => {
                 if (props.activePage === lastActivePage - 3) {
                   changeButton1(lastActivePage - 4);
@@ -194,6 +209,7 @@ const Pagination = (props) => {
             </button>
           </div>
           <button
+            className="pointer"
             onClick={() => {
               props.changeActivePage(0);
               changeButton1(4);
@@ -208,7 +224,9 @@ const Pagination = (props) => {
           </div>
           <button
             className={
-              props.activePage === lastActivePage - 4 ? "current" : null
+              props.activePage === lastActivePage - 4
+                ? "current pointer"
+                : "pointer"
             }
             onClick={() => {
               props.changeActivePage(lastActivePage - 4);
@@ -221,7 +239,9 @@ const Pagination = (props) => {
           </button>
           <button
             className={
-              props.activePage === lastActivePage - 3 ? "current" : null
+              props.activePage === lastActivePage - 3
+                ? "current pointer"
+                : "pointer"
             }
             onClick={() => {
               props.changeActivePage(lastActivePage - 3);
@@ -231,7 +251,9 @@ const Pagination = (props) => {
           </button>
           <button
             className={
-              props.activePage === lastActivePage - 2 ? "current" : null
+              props.activePage === lastActivePage - 2
+                ? "current pointer"
+                : "pointer"
             }
             onClick={() => {
               props.changeActivePage(lastActivePage - 2);
@@ -241,7 +263,9 @@ const Pagination = (props) => {
           </button>
           <button
             className={
-              props.activePage === lastActivePage - 1 ? "current" : null
+              props.activePage === lastActivePage - 1
+                ? "current pointer"
+                : "pointer"
             }
             onClick={() => {
               props.changeActivePage(lastActivePage - 1);
@@ -250,7 +274,11 @@ const Pagination = (props) => {
             {lastActivePage}
           </button>
           <button
-            className={props.activePage === lastActivePage ? "current" : null}
+            className={
+              props.activePage === lastActivePage
+                ? "current pointer"
+                : "pointer"
+            }
             onClick={() => {
               props.changeActivePage(lastActivePage);
             }}
@@ -259,6 +287,12 @@ const Pagination = (props) => {
           </button>
           <div className="no-hover">
             <button
+              className="pointer"
+              style={
+                props.activePage === lastActivePage
+                  ? { visibility: "hidden" }
+                  : null
+              }
               disabled={props.activePage === lastActivePage}
               onClick={() => {
                 props.changeActivePage(props.activePage + 1);

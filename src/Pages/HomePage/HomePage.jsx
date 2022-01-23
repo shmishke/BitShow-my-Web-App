@@ -19,13 +19,6 @@ const HomePage = (props) => {
             />
           </div>
         )}
-
-        {/* <DisplayNCards
-          fetchResult={props.fetchResult}
-          changeActivePage={props.changeActivePage}
-          changeNumberOfCardsDisplaying={props.changeNumberOfCardsDisplaying}
-          numberOfCardsDisplaying={props.numberOfCardsDisplaying}
-        /> */}
         <div className="what-to-watch">
           <h2>What To Watch</h2>
         </div>

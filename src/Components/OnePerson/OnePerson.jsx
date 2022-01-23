@@ -44,13 +44,16 @@ const OnePerson = (props) => {
         )}
       </div>
       <div className="single-person-name">
-        <h3 onClick={() => setCharacterImageClick(false)}>
+        <h3 onClick={() => setCharacterImageClick(false)} className="pointer">
           {props.e.person.name}
         </h3>
         {!props.e.self ? (
           <>
             <p>as</p>
-            <h3 onClick={() => setCharacterImageClick(true)}>
+            <h3
+              onClick={() => setCharacterImageClick(true)}
+              className="pointer"
+            >
               {props.e.character.name} {props.e.voice ? "(voice)" : null}
             </h3>
           </>

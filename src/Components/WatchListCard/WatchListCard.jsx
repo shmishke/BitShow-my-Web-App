@@ -69,7 +69,7 @@ const WatchListCard = (props) => {
           </div>
         </div>
         <div className="watchlist-buttons">
-          <div>
+          <div className="pointer">
             <RiDeleteBin6Line
               onClick={() => {
                 props.addAndRemoveStorageFunc.remove(
@@ -84,6 +84,8 @@ const WatchListCard = (props) => {
           <div>
             <Link to={`/show/${props.show.id}`}>
               <BsFillPlayFill
+                className="pointer"
+                className="pointer"
                 onClick={() => {
                   props.addAndRemoveStorageFunc.add(
                     props.recentlyViewedShows,

@@ -9,7 +9,7 @@ const SmallCardlist = (props) => {
   return (
     <div className="small-cardlist-search">
       <button
-        className="btn-small-cardlist"
+        className="btn-small-cardlist pointer"
         disabled={sliceBegin === 0}
         onClick={() => {
           setSliceBegin(sliceBegin - (sliceEnd - sliceBegin));
@@ -31,7 +31,7 @@ const SmallCardlist = (props) => {
         );
       })}
       <button
-        className="btn-small-cardlist"
+        className="btn-small-cardlist pointer"
         disabled={
           sliceBegin >= props.showsToDisplay.length - (sliceEnd - sliceBegin)
         }

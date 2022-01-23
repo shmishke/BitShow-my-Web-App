@@ -79,7 +79,7 @@ const DisplayShowInfo = (props) => {
               <h3> {moment(props.show.premiered).format("DD.MM.YYYY.")}</h3>
             </div>
             <div
-              className="add-to-watchlist"
+              className="add-to-watchlist pointer"
               onMouseEnter={() =>
                 setAddedOrHoveredBtn({
                   added: addedOrHoveredBtn.added,
@@ -171,6 +171,7 @@ const DisplayShowInfo = (props) => {
               <h3>Images</h3>
               <div className="images">
                 <button
+                  className="pointer"
                   onClick={() => {
                     changeImageSlice(imageSlice - 4);
                     changeImageSliceEnd(imageSliceEnd - 4);
@@ -187,6 +188,7 @@ const DisplayShowInfo = (props) => {
                   );
                 })}
                 <button
+                  className="pointer"
                   onClick={() => {
                     changeImageSlice(imageSlice + 4);
                     changeImageSliceEnd(imageSliceEnd + 4);

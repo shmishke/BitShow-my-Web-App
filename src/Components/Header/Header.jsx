@@ -11,7 +11,7 @@ const Header = (props) => {
   return (
     <>
       <div className="header">
-        <div className="logo">
+        <div className="logo pointer">
           <Link to="/">
             <h1>BitShow</h1>
           </Link>
@@ -24,7 +24,7 @@ const Header = (props) => {
               placeholder="Search TV shows"
             />
             <button
-              className="watchlist-toggle-btn "
+              className="watchlist-toggle-btn pointer "
               onClick={() => {
                 if (searchWidth === 0) setSearchWidth(150);
                 if (searchWidth > 0) setSearchWidth(0);
@@ -36,7 +36,7 @@ const Header = (props) => {
           <div className="watchlist-btn">
             {isButtonClicked ? (
               <button
-                className="watchlist-toggle-btn eye-btn"
+                className="watchlist-toggle-btn eye-btn pointer"
                 onClick={() => {
                   changeIsButtonClicked(false);
                 }}
@@ -45,14 +45,18 @@ const Header = (props) => {
                   <BsEyeFill />
                 </div>
                 <div
-                  className={props.watchList ? "number" : "number display-none"}
+                  className={
+                    props.watchList
+                      ? "number pointer"
+                      : "number pointer display-none"
+                  }
                 >
                   {props.watchList ? props.watchList.length : null}
                 </div>
               </button>
             ) : (
               <button
-                className="watchlist-toggle-btn eye-btn"
+                className="watchlist-toggle-btn eye-btn pointer"
                 onClick={() => {
                   changeIsButtonClicked(true);
                 }}

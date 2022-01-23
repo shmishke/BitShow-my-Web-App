@@ -121,7 +121,7 @@ const SinglePage = (props) => {
 
               {cast.length > 8 ? (
                 numOfCast === 8 ? (
-                  <div className="show-more">
+                  <div className="show-more pointer">
                     <p onClick={() => changeNumOfCast(cast.length)}>
                       Show all cast
                     </p>

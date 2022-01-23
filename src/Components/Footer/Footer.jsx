@@ -42,6 +42,7 @@ const Footer = (props) => {
           </h6>
         </div>
         <button
+          className="pointer"
           onClick={() => {
             window.localStorage.removeItem("watchList");
             window.localStorage.removeItem("recentlyViewed");

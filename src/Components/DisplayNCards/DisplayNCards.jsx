@@ -3,10 +3,7 @@ import "./displayNCards.scss";
 const DisplayNCards = (props) => {
   return (
     <>
-      <h3>
-        Displaying {props.numberOfCardsDisplaying} out of{" "}
-        {props.fetchResult.length} movies
-      </h3>
+      <h3>Displaying {props.numberOfCardsDisplaying} TV shows per page.</h3>
       <button
         onClick={() => {
           props.changeActivePage(0);

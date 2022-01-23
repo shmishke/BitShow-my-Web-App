@@ -36,6 +36,7 @@ const Card = (props) => {
         <div className="card-info">
           {!addedToWatchlist ? (
             <button
+              className="pointer"
               onClick={() => {
                 setAddedToWatchList(true);
                 props.addAndRemoveStorageFunc.add(
@@ -53,7 +54,7 @@ const Card = (props) => {
             </button>
           ) : (
             <button
-              className="remove"
+              className="remove pointer"
               onClick={() => {
                 setAddedToWatchList(false);
                 props.addAndRemoveStorageFunc.remove(
