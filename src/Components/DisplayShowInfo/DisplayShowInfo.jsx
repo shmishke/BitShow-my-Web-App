@@ -1,5 +1,4 @@
-import "./displayShowInfo.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RiStarSLine } from "react-icons/ri";
 import { GiStopwatch } from "react-icons/gi";
 import { MdOutlineLiveTv } from "react-icons/md";
@@ -11,8 +10,8 @@ import {
   FaRegHeart,
 } from "react-icons/fa";
 import moment from "moment";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import "./displayShowInfo.scss";
 
 const DisplayShowInfo = (props) => {
   const [imageSlice, changeImageSlice] = useState(0);

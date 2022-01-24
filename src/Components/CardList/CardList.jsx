@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react/cjs/react.development";
+import { useEffect, useState } from "react";
 import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
 import "./cardList.scss";
