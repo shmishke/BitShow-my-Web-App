@@ -1,14 +1,12 @@
-import { useEffect, useState } from "react";
-import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import "./carousel.scss";
-import { FcLike } from "react-icons/fc";
-import { TiStar } from "react-icons/ti";
+import { useEffect, useState } from "react";
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
 import DisplayShowInfo from "../../Components/DisplayShowInfo/DisplayShowInfo";
 
 const Carousel = (props) => {
   const [carouselShow, changeCarouselShow] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   const bestRatedShows = [...props.fetchResult]
     .sort((a, b) => {
@@ -18,17 +16,12 @@ const Carousel = (props) => {
     })
     .slice(0, 10);
 
-  const showId = bestRatedShows[carouselShow].id;
-
-  useEffect(() => {
-    fetch(`https://api.tvmaze.com/shows/${showId}/images`)
-      .then((res) => res.json())
-      .then((res) => console.log(res));
-  }, [showId]);
-  console.log(bestRatedShows);
-
   return (
-    <div className="carousel-container">
+    <div
+      className="carousel-container"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <DisplayShowInfo
         show={bestRatedShows[carouselShow]}
         watchList={props.watchList}
@@ -37,7 +30,7 @@ const Carousel = (props) => {
         details={props.details}
       />
       <div className="btn1">
-        {carouselShow !== 0 && (
+        {isHovered && carouselShow !== 0 && (
           <>
             <button
               onClick={() => {
@@ -50,7 +43,7 @@ const Carousel = (props) => {
         )}
       </div>
       <div className="btn2">
-        {carouselShow < 9 && (
+        {isHovered && carouselShow < 9 && (
           <>
             <button
               onClick={() => {

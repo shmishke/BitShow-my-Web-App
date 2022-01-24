@@ -44,7 +44,10 @@ const OnePerson = (props) => {
         )}
       </div>
       <div className="single-person-name">
-        <h3 onClick={() => setCharacterImageClick(false)} className="pointer">
+        <h3
+          onClick={() => setCharacterImageClick(false)}
+          className={!characterImageClick ? "pointer active " : "pointer"}
+        >
           {props.e.person.name}
         </h3>
         {!props.e.self ? (
@@ -52,7 +55,7 @@ const OnePerson = (props) => {
             <p>as</p>
             <h3
               onClick={() => setCharacterImageClick(true)}
-              className="pointer"
+              className={characterImageClick ? "pointer active " : "pointer"}
             >
               {props.e.character.name} {props.e.voice ? "(voice)" : null}
             </h3>

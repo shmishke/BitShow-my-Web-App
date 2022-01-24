@@ -1,38 +1,68 @@
 import "./header.scss";
-import { FaSearch } from "react-icons/fa";
 import { BsEye, BsEyeFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import WatchListComponent from "../WatchListComponent/WatchListComponent.jsx";
+import SearchButon from "../SearchButton/SearchButton";
 
 const Header = (props) => {
-  const [searchWidth, setSearchWidth] = useState(0);
   const [isButtonClicked, changeIsButtonClicked] = useState(false);
+  const [width, setWidth] = useState(0);
+  const [searchValue, setSearchValue] = useState("");
+
   return (
     <>
       <div className="header">
         <div className="logo pointer">
           <Link to="/">
-            <h1>BitShow</h1>
+            <h1 onClick={props.changeActivePage(0)}>BitShow</h1>
           </Link>
         </div>
         <div className="buttons">
-          <div className="search-btn">
-            <input
-              type="text"
-              style={{ width: searchWidth }}
-              placeholder="Search TV shows"
-            />
-            <button
-              className="watchlist-toggle-btn pointer "
-              onClick={() => {
-                if (searchWidth === 0) setSearchWidth(150);
-                if (searchWidth > 0) setSearchWidth(0);
-              }}
-            >
-              <FaSearch />
-            </button>
-          </div>
+          <SearchButon
+            onChangeFunc={setSearchValue}
+            setSearchValue={setSearchValue}
+            width={width}
+            setWidth={setWidth}
+            disabled={isButtonClicked}
+          />
+
+          {searchValue && (
+            <div className="search-list">
+              {props.fetchResult.filter((e) =>
+                e.name.toLowerCase().includes(searchValue.toLowerCase())
+              ).length > 0 ? (
+                props.fetchResult
+                  .filter((e) =>
+                    e.name.toLowerCase().includes(searchValue.toLowerCase())
+                  )
+                  .slice(0, 10)
+                  .map((e, i) => (
+                    <div className="single-item" key={i}>
+                      <Link to={`/show/${e.id}`}>
+                        <h1
+                          onClick={() => {
+                            props.addAndRemoveStorageFunc.add(
+                              props.recentlyViewedShows,
+                              props.changeRecentlyViewedShows,
+                              e.id,
+                              "recentlyViewed"
+                            );
+                          }}
+                        >
+                          {e.name}
+                        </h1>
+                      </Link>
+                    </div>
+                  ))
+              ) : (
+                <div className="single-item">
+                  <h1>No results..</h1>
+                </div>
+              )}
+            </div>
+          )}
+
           <div className="watchlist-btn">
             {isButtonClicked ? (
               <button
@@ -58,6 +88,8 @@ const Header = (props) => {
               <button
                 className="watchlist-toggle-btn eye-btn pointer"
                 onClick={() => {
+                  setSearchValue("");
+                  setWidth(0);
                   changeIsButtonClicked(true);
                 }}
               >
@@ -84,6 +116,7 @@ const Header = (props) => {
               addAndRemoveStorageFunc={props.addAndRemoveStorageFunc}
               recentlyViewedShows={props.recentlyViewedShows}
               changeRecentlyViewedShows={props.changeRecentlyViewedShows}
+              changeIsButtonClicked={changeIsButtonClicked}
             />
           </div>
         </div>

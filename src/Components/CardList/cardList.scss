@@ -60,27 +60,7 @@
   }
 
   .search {
-    display: flex;
-    flex-grow: 0;
-    align-items: flex-end;
-    margin-bottom: 1rem;
-    align-self: flex-end;
     margin-bottom: 2rem;
-
-    .icon {
-      font-size: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-left: 0.3rem;
-    }
-    input {
-      border: 0;
-      // border-right: 1px solid $textColor;
-      border-bottom: 1px solid $textColor;
-      background-color: $mainColor;
-      color: $textColor;
-    }
   }
 
   .pagination-div {

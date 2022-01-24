@@ -7,7 +7,9 @@ const HomePage = (props) => {
   return (
     <>
       <div className="top-of-page">
-        <h1>Top 10 best-rated shows</h1>
+        <div className="top-of-filterpage">
+          <h1>Top 10 best-rated shows</h1>
+        </div>
         {props.fetchResult && (
           <div className="carousel">
             <Carousel

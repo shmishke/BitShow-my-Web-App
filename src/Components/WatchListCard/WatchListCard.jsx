@@ -21,15 +21,18 @@ const WatchListCard = (props) => {
       .then((res) => res.json())
       .then((res) => setSeasonsAndEpisodes(res));
   }, [props.watchList]);
-  console.log(props.show);
   return (
     <div className="watchlist-single-card">
       <div className="watchlist-img">
-        <img src={props.show.image.original} alt="" />
+        <Link to={`/show/${props.show.id}`}>
+          <img src={props.show.image.original} alt="" />
+        </Link>
       </div>
       <div className="watchlist-info">
         <div className="watchlist-top">
-          <h3>{props.show.name}</h3>
+          <Link to={`/show/${props.show.id}`}>
+            <h3>{props.show.name}</h3>
+          </Link>
           <div className="watchlist-rating">
             {props.show.rating.average && (
               <>
@@ -55,21 +58,15 @@ const WatchListCard = (props) => {
               {props.show.genres && genre === "Science-Fiction" ? "SF" : genre}
             </div>
             <div className="watchlist-show-date">
-              <p>
-                {moment(props.show.premiered).format("MMM YYYY")}
-                {" - "}
-                {props.show.ended
-                  ? moment(props.show.ended).format("MMM YYYY")
-                  : "Ongoing"}
-              </p>
               <span>
                 <BsCameraReelsFill />
               </span>
+              <p>{props.show.status}</p>
             </div>
           </div>
         </div>
         <div className="watchlist-buttons">
-          <div className="pointer">
+          <div className="pointer delete">
             <RiDeleteBin6Line
               onClick={() => {
                 props.addAndRemoveStorageFunc.remove(

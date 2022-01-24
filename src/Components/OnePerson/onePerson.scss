@@ -1,3 +1,4 @@
+@import "../../variables.module.scss";
 .single-person {
   width: 50%;
   align-items: center;
@@ -7,6 +8,11 @@
     display: flex;
     flex-direction: column;
     margin-left: 2rem;
+
+    p {
+      color: rgb(184, 174, 174);
+      margin: 3px 0;
+    }
   }
   .single-person-img {
     margin-right: 1.7rem;
@@ -16,5 +22,9 @@
       border-radius: 40%;
       margin: 0 0 1rem 1.5rem;
     }
+  }
+  .active {
+    color: $orange;
+    font-size: 1.5rem;
   }
 }

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react/cjs/react.development";
 import Card from "../Card/Card";
 import "./smallCardlist.scss";
 
@@ -6,11 +8,16 @@ const SmallCardlist = (props) => {
   const [sliceBegin, setSliceBegin] = useState(0);
   const [sliceEnd, setSliceEnd] = useState(4);
 
+  useEffect(() => {
+    setSliceBegin(0);
+    setSliceEnd(4);
+  }, [props.showsToDisplay]);
+
   return (
     <div className="small-cardlist-search">
       <button
         className="btn-small-cardlist pointer"
-        disabled={sliceBegin === 0}
+        style={{ visibility: sliceBegin === 0 ? "hidden" : "visible" }}
         onClick={() => {
           setSliceBegin(sliceBegin - (sliceEnd - sliceBegin));
           setSliceEnd(sliceEnd - (sliceEnd - sliceBegin));
@@ -18,9 +25,10 @@ const SmallCardlist = (props) => {
       >
         {"<"}
       </button>
-      {props.showsToDisplay.slice(sliceBegin, sliceEnd).map((e) => {
+      {props.showsToDisplay.slice(sliceBegin, sliceEnd).map((e, i) => {
         return (
           <Card
+            key={i}
             show={e}
             recentlyViewedShows={props.recentlyViewedShows}
             changeRecentlyViewedShows={props.changeRecentlyViewedShows}
@@ -32,6 +40,12 @@ const SmallCardlist = (props) => {
       })}
       <button
         className="btn-small-cardlist pointer"
+        style={{
+          visibility:
+            sliceBegin >= props.showsToDisplay.length - (sliceEnd - sliceBegin)
+              ? "hidden"
+              : "visible",
+        }}
         disabled={
           sliceBegin >= props.showsToDisplay.length - (sliceEnd - sliceBegin)
         }

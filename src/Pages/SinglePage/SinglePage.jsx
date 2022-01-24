@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import OneEpisode from "../../Components/SingleEpisode.jsx/OneEpisode";
+import OneEpisode from "../../Components/OneEpisode/OneEpisode";
 import OnePerson from "../../Components/OnePerson/OnePerson";
 import SmallCardlist from "../../Components/SmallCardlist/SmallCardlist";
 import "./singlePage.scss";
@@ -94,7 +94,7 @@ const SinglePage = (props) => {
             backgroundSize: "cover",
           }}
         >
-          /
+          .
           <DisplayShowInfo
             show={show}
             watchList={props.watchList}
@@ -106,16 +106,16 @@ const SinglePage = (props) => {
         <div className="main">
           <h3 className="title">Best Rated episodes</h3>
           <div className="episodes">
-            {bestRatedEpisodes.slice(0, 3).map((e) => (
-              <OneEpisode e={e} details={props.details} />
+            {bestRatedEpisodes.slice(0, 3).map((e, i) => (
+              <OneEpisode e={e} details={props.details} key={i} />
             ))}
           </div>
           <div className="cast-and-recent-episode">
             <div className="cast-container">
               <h3 className="title">Cast</h3>
               <div className="cast">
-                {showCast(cast).map((e) => (
-                  <OnePerson e={e} />
+                {showCast(cast).map((e, i) => (
+                  <OnePerson e={e} key={i} />
                 ))}
               </div>
 
@@ -135,8 +135,8 @@ const SinglePage = (props) => {
             </div>
             <div className="recent-episodes">
               <h3 className="title">Most recent episodes</h3>
-              {mostRecentEpisodes.slice(0, 3).map((e) => (
-                <OneEpisode e={e} details={props.details} />
+              {mostRecentEpisodes.slice(0, 3).map((e, i) => (
+                <OneEpisode key={i} e={e} details={props.details} />
               ))}
             </div>
           </div>

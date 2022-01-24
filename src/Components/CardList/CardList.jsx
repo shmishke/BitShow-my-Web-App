@@ -1,20 +1,22 @@
-import { useState } from "react/cjs/react.development";
+import { useEffect, useState } from "react/cjs/react.development";
 import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
 import "./cardList.scss";
 import { IoSearchCircle, IoSettingsSharp } from "react-icons/io5";
 import { AiFillCheckCircle } from "react-icons/ai";
 import variables from "../../variables.module.scss";
+import { useLocation } from "react-router-dom";
+import SearchButon from "../SearchButton/SearchButton";
 
 const CardList = (props) => {
-  console.log(variables);
-  const [search, searchValue] = useState("");
-  const originalData = props.fetchResult.map((e) => e);
-  const [sort, changeSort] = useState(originalData);
+  const [showsToDisplay, setShowsToDisplay] = useState(props.fetchResult);
+  const [search, getSearchValue] = useState("");
+  const [sort, changeSort] = useState(showsToDisplay.map((e) => e));
   const [settingsIconClicked, changeSettingsIconClicked] = useState(false);
   const [cardsPerPage, setCardsPerPage] = useState(
     props.numberOfCardsDisplaying
   );
+  const [width, setWidth] = useState(0);
 
   const results = sort.slice(
     props.numberOfCardsDisplaying * props.activePage,
@@ -22,25 +24,30 @@ const CardList = (props) => {
       props.numberOfCardsDisplaying
   );
 
-  const originalDataSortedByName = originalData
-    .map((e) => e)
-    .sort((a, b) => {
-      if (a.name < b.name) return -1;
-      if (a.name > b.name) return 1;
-      return 0;
-    });
-
-  const originalDataSortedByRating = originalData
-    .map((e) => e)
-    .sort((a, b) => {
-      if (a.rating.average < b.rating.average) return -1;
-      if (a.rating.average > b.rating.average) return 1;
-      return 0;
-    });
+  const sortBy = (name) => {
+    const arr = sort.map((e) => e);
+    if ((name = "name"))
+      return arr.sort((a, b) => {
+        if (a.name < b.name) return -1;
+        if (a.name > b.name) return 1;
+        return 0;
+      });
+    if ((name = "rating"))
+      return arr.sort((a, b) => {
+        if (a.rating.average < b.rating.average) return -1;
+        if (a.rating.average > b.rating.average) return 1;
+        return 0;
+      });
+  };
 
   const searchResult = sort.filter((e) =>
     e.name.toLowerCase().includes(search.toLowerCase())
   );
+
+  useEffect(() => {
+    changeSort(props.fetchResult);
+    setShowsToDisplay(props.fetchResult);
+  }, [props.fetchResult]);
 
   return (
     <>
@@ -53,15 +60,13 @@ const CardList = (props) => {
               name="sort"
               id="sort"
               onChange={(e) => {
-                if (e.target.value === "#") changeSort(originalData);
-                if (e.target.value === "a-z")
-                  changeSort(originalDataSortedByName);
+                if (e.target.value === "#") changeSort(sort);
+                if (e.target.value === "a-z") changeSort(sortBy("name"));
                 if (e.target.value === "z-a")
-                  changeSort([...originalDataSortedByName].reverse());
-                if (e.target.value === "h-l")
-                  changeSort(originalDataSortedByRating);
+                  changeSort(sortBy("name").reverse());
+                if (e.target.value === "h-l") changeSort(sortBy("rating"));
                 if (e.target.value === "l-h")
-                  changeSort([...originalDataSortedByRating].reverse());
+                  changeSort(sortBy("rating").reverse());
               }}
             >
               <option value="#">Default</option>
@@ -72,9 +77,13 @@ const CardList = (props) => {
             </select>
           </label>
           <div className="num-of-cards-displaying">
-            <h3>
-              Displaying {props.numberOfCardsDisplaying} TV shows per page
-            </h3>
+            {props.fetchResult.length > props.numberOfCardsDisplaying ? (
+              <h3>
+                Displaying {props.numberOfCardsDisplaying} TV shows per page
+              </h3>
+            ) : (
+              <h3>Displaying ALL TV shows</h3>
+            )}
             <div
               className="settings-icon pointer"
               onClick={() => {
@@ -116,7 +125,11 @@ const CardList = (props) => {
                 type="text"
                 id="num-of-cards"
                 name="num-of-cards"
-                placeholder={props.numberOfCardsDisplaying}
+                placeholder={
+                  props.fetchResult.length <= props.numberOfCardsDisplaying
+                    ? props.fetchResult.length
+                    : props.numberOfCardsDisplaying
+                }
               ></input>
               TV Shows per Page
             </label>
@@ -146,22 +159,22 @@ const CardList = (props) => {
           </div>
         )}
         <div className="search">
-          <input
-            type="text"
-            onChange={(e) => searchValue(e.target.value)}
-            placeholder="Search TV Shows.."
+          <SearchButon
+            disabled={false}
+            onChangeFunc={getSearchValue}
+            setSearchValue={getSearchValue}
+            width={width}
+            setWidth={setWidth}
           />
-          <div className="icon">
-            <IoSearchCircle />
-          </div>
         </div>
       </div>
 
       {!search && (
         <div className="card-list">
-          {results.map((e) => {
+          {results.map((e, i) => {
             return (
               <Card
+                key={i}
                 show={e}
                 recentlyViewedShows={props.recentlyViewedShows}
                 changeRecentlyViewedShows={props.changeRecentlyViewedShows}
@@ -177,10 +190,11 @@ const CardList = (props) => {
       {search && (
         <div className="card-list">
           {searchResult.length >= 1 ? (
-            searchResult.map((e) => {
+            searchResult.map((e, i) => {
               return (
                 <Card
                   show={e}
+                  key={i}
                   recentlyViewedShows={props.recentlyViewedShows}
                   changeRecentlyViewedShows={props.changeRecentlyViewedShows}
                   watchList={props.watchList}

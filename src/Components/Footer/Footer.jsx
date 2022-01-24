@@ -6,15 +6,13 @@ import { useLocation } from "react-router-dom";
 
 const Footer = (props) => {
   const location = useLocation();
-  const currentShow = Number.parseInt(
-    location.pathname.split("").reverse().join("")
-  );
+  const currentShow = Number.parseInt(location.pathname.split("/")[2]);
 
   const showsToDisplay = () => {
     const ids = JSON.parse(
       window.localStorage.getItem("recentlyViewed")
     ).filter((e) => e != currentShow);
-    return ids.map((e) => props.fetchResult.find((el) => el.id === e));
+    return ids.map((e) => props.fetchResult.find((el) => el.id == e));
   };
 
   return (
@@ -40,6 +38,7 @@ const Footer = (props) => {
           <h6>
             <DiReact /> Milos Delic 2021 <DiJavascript1 />
           </h6>
+          <div className="icons"></div>
         </div>
         <button
           className="pointer"

@@ -5,6 +5,7 @@ import Header from "./Components/Header/Header";
 import HomePage from "./Pages/HomePage/HomePage";
 import "./app.scss";
 import SinglePage from "./Pages/SinglePage/SinglePage";
+import FilterPage from "./Pages/FilterPage/FilterPage";
 
 function App() {
   const [fetchResult, getFetchResult] = useState(false);
@@ -86,6 +87,7 @@ function App() {
               addAndRemoveStorageFunc={addAndRemoveStorageFunc}
               recentlyViewedShows={recentlyViewedShows}
               changeRecentlyViewedShows={changeRecentlyViewedShows}
+              changeActivePage={changeActivePage}
             />
             <div className="main">
               <Switch>
@@ -115,6 +117,22 @@ function App() {
                     addToWatchList={addToWatchList}
                     addAndRemoveStorageFunc={addAndRemoveStorageFunc}
                     details={details}
+                  />
+                </Route>
+                <Route path="/shows/:genre">
+                  <FilterPage
+                    fetchResult={fetchResult}
+                    recentlyViewedShows={recentlyViewedShows}
+                    changeRecentlyViewedShows={changeRecentlyViewedShows}
+                    activePage={activePage}
+                    changeActivePage={changeActivePage}
+                    numberOfCardsDisplaying={numberOfCardsDisplaying}
+                    changeNumberOfCardsDisplaying={
+                      changeNumberOfCardsDisplaying
+                    }
+                    watchList={watchList}
+                    addToWatchList={addToWatchList}
+                    addAndRemoveStorageFunc={addAndRemoveStorageFunc}
                   />
                 </Route>
               </Switch>

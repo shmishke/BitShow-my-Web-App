@@ -21,10 +21,12 @@ const DisplayShowInfo = (props) => {
     added: false,
     hovered: false,
   });
-  const [crew, setCrew] = useState([]);
-  const [cast, setCast] = useState([]);
-  const [seasons, setSeasons] = useState([]);
-  const [episodes, setEpisodes] = useState([]);
+  const [crew, setCrew] = useState();
+  const [cast, setCast] = useState();
+  const [seasons, setSeasons] = useState();
+  const [episodes, setEpisodes] = useState();
+  const [modal, toggleModal] = useState(false);
+  const [clickedImage, setClickedImage] = useState();
 
   useEffect(() => {
     changeImageSlice(0);
@@ -51,14 +53,10 @@ const DisplayShowInfo = (props) => {
     if (props.watchList && props.watchList.includes(Number(props.show.id))) {
       setAddedOrHoveredBtn({ added: true, hovered: false });
     } else setAddedOrHoveredBtn({ added: false, hovered: false });
+    toggleModal(false);
   }, [props.watchList]);
 
-  if (
-    crew.length > 0 &&
-    cast.length > 0 &&
-    seasons.length > 0 &&
-    episodes.length > 0
-  )
+  if (episodes && seasons && cast && crew)
     return (
       <div className="image-info">
         <div className="image">
@@ -150,22 +148,25 @@ const DisplayShowInfo = (props) => {
               <h1>{props.show.name}</h1>
             </Link>
           </div>
-          <div className="seasons-episodes">
-            <h3>
-              {seasons.length == 1
-                ? "One season"
-                : `Seasons (${seasons.length})`}
-            </h3>
-            <span> {"</>"} </span>
-            <h3>
-              Episodes (
-              {seasons.reduce((acc, e) => {
-                const all = acc + Number(e.episodeOrder);
-                return all;
-              }, 0)}
-              )
-            </h3>
-          </div>
+          {seasons.length > 0 && episodes.length > 0 && (
+            <div className="seasons-episodes">
+              <h3>
+                {seasons.length == 1
+                  ? "One season"
+                  : `Seasons (${seasons.length})`}
+              </h3>
+              <span> {"</>"} </span>
+              <h3>
+                Episodes (
+                {seasons.reduce((acc, e) => {
+                  const all = acc + Number(e.episodeOrder);
+                  return all;
+                }, 0)}
+                )
+              </h3>
+            </div>
+          )}
+
           {episodes[0].image && (
             <div className="images-container">
               <h3>Images</h3>
@@ -177,13 +178,23 @@ const DisplayShowInfo = (props) => {
                     changeImageSliceEnd(imageSliceEnd - 4);
                   }}
                   disabled={imageSlice === 0}
+                  style={{
+                    visibility: imageSlice === 0 ? "hidden" : "visible",
+                  }}
                 >
                   <FaAngleLeft />
                 </button>
-                {episodes.slice(imageSlice, imageSliceEnd).map((e) => {
+                {episodes.slice(imageSlice, imageSliceEnd).map((e, i) => {
                   return (
-                    <div className="single-image">
-                      <img src={e.image.original} alt="" />
+                    <div className="single-image pointer" key={i}>
+                      <img
+                        src={e.image.original}
+                        alt=""
+                        onClick={() => {
+                          toggleModal(true);
+                          setClickedImage(e.image.original);
+                        }}
+                      />
                     </div>
                   );
                 })}
@@ -194,6 +205,10 @@ const DisplayShowInfo = (props) => {
                     changeImageSliceEnd(imageSliceEnd + 4);
                   }}
                   disabled={imageSliceEnd >= episodes.length}
+                  style={{
+                    visibility:
+                      imageSliceEnd >= episodes.length ? "hidden" : "visible",
+                  }}
                 >
                   <FaAngleRight />
                 </button>
@@ -209,8 +224,12 @@ const DisplayShowInfo = (props) => {
               <div className="genres-container">
                 <h3>Genres:</h3>
                 <div className="genres">
-                  {props.show.genres.map((e) => {
-                    return <h4>{e}</h4>;
+                  {props.show.genres.map((e, i) => {
+                    return (
+                      <Link to={`/shows/${e}`} key={i}>
+                        <h4>{e}</h4>
+                      </Link>
+                    );
                   })}
                 </div>
               </div>
@@ -226,24 +245,46 @@ const DisplayShowInfo = (props) => {
                 <h3>Starring: {cast[0].person.name}</h3>
               )}
             </div>
-            <div className="creator">
-              {crew.find((e) => e.type === "Creator") ? (
-                <h3>
-                  Created by:
-                  {crew.find((e) => e.type === "Creator").person.name}
-                </h3>
-              ) : (
-                <h3>
-                  Produced by:
-                  {
-                    crew.find((e) => e.type === "Executive Producer").person
-                      .name
-                  }
-                </h3>
+            {crew.length > 0 && (
+              <div className="creator">
+                {crew.find((e) => e.type === "Creator") ? (
+                  <h3>
+                    Created by:
+                    {crew.find((e) => e.type === "Creator").person.name}
+                  </h3>
+                ) : (
+                  <h3>
+                    Produced by:
+                    {
+                      crew.find((e) => e.type === "Executive Producer").person
+                        .name
+                    }
+                  </h3>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+        {modal && (
+          <div className="modal">
+            <div className="modal-container">
+              {clickedImage && (
+                <>
+                  <div className="img">
+                    <img src={clickedImage} alt="$" />
+                  </div>
+                  <button
+                    onClick={() => {
+                      toggleModal(false);
+                    }}
+                  >
+                    x
+                  </button>
+                </>
               )}
             </div>
           </div>
-        </div>
+        )}
       </div>
     );
   else return null;

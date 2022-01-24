@@ -2,8 +2,8 @@
 
 .watchlist-single-card {
   display: flex;
-  background-color: white;
-  color: $mainColor;
+  border: 1px solid $textColor;
+  color: $textColor;
   width: 100%;
   margin-bottom: 1.3rem;
   margin-top: 1rem;
@@ -24,7 +24,6 @@
     flex-grow: 1;
     display: flex;
     flex-wrap: wrap;
-    padding: 0.3rem 0.3rem;
 
     .watchlist-top {
       flex-grow: 0;
@@ -32,7 +31,8 @@
       height: 25%;
       display: flex;
       align-items: center;
-      padding: 0 0.4rem;
+      padding: 0 0.7rem;
+
       justify-content: space-between;
 
       .watchlist-rating {
@@ -45,9 +45,9 @@
       height: 75%;
       display: flex;
       flex-wrap: wrap;
+      padding: 0 0.7rem;
 
       .seasons-episodes {
-        padding: 5px 10px;
         width: 100%;
         display: flex;
         flex-grow: 0;
@@ -62,7 +62,7 @@
           span {
             flex-grow: 0;
             flex-shrink: 0;
-            padding: 0 5px;
+
             display: flex;
             align-items: center;
             justify-content: center;
@@ -86,7 +86,8 @@
           span {
             font-size: 0.9rem;
             flex-grow: 0;
-            padding: 0 6px 0 5px;
+            padding-right: 1rem;
+
             align-self: center;
           }
         }
@@ -96,6 +97,14 @@
       display: flex;
       flex-direction: column;
       flex-grow: 1;
+
+      .delete {
+        color: #561d25;
+
+        :hover {
+          color: $textColor;
+        }
+      }
 
       div {
         flex-grow: 0;
@@ -107,5 +116,9 @@
         font-size: 1.3rem;
       }
     }
+  }
+  a {
+    color: $textColor;
+    text-decoration: none;
   }
 }
