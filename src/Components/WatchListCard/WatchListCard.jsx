@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react/cjs/react.development";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./watchListCard.scss";
 import { RiStarSLine } from "react-icons/ri";

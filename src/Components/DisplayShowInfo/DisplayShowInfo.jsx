@@ -11,7 +11,7 @@ import {
   FaRegHeart,
 } from "react-icons/fa";
 import moment from "moment";
-import { useEffect } from "react/cjs/react.development";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const DisplayShowInfo = (props) => {
