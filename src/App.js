@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Footer from "./Components/Footer/Footer";
 import Header from "./Components/Header/Header";
 import HomePage from "./Pages/HomePage/HomePage";
-import "./app.scss";
 import SinglePage from "./Pages/SinglePage/SinglePage";
 import FilterPage from "./Pages/FilterPage/FilterPage";
+import "./app.scss";
 
 function App() {
   const [fetchResult, getFetchResult] = useState(false);
@@ -33,7 +33,7 @@ function App() {
     if (clickedShows) {
       const shows = [
         Number(id),
-        ...clickedShows.filter((e) => e != Number(id)),
+        ...clickedShows.filter((e) => e !== Number(id)),
       ];
       setClickedShows(shows);
       window.localStorage.setItem(storageName, JSON.stringify(shows));
@@ -64,7 +64,6 @@ function App() {
   };
 
   useEffect(() => {
-    // window.localStorage.clear();
     fetch(`http://api.tvmaze.com/shows`)
       .then((res) => res.json())
       .then((res) => getFetchResult(res));

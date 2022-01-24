@@ -1,18 +1,8 @@
-import "./card.scss";
 import { IoHeart, IoHeartDislike } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react/cjs/react.development";
-import { useLocation } from "react-router-dom";
+import "./card.scss";
 
 const Card = (props) => {
-  const [addedToWatchlist, setAddedToWatchList] = useState(false);
-
-  useEffect(() => {
-    props.watchList && props.watchList.includes(props.show.id)
-      ? setAddedToWatchList(true)
-      : setAddedToWatchList(false);
-  }, [props.watchList]);
-
   return (
     <>
       <div className="card">
@@ -41,7 +31,6 @@ const Card = (props) => {
                 <button
                   className="pointer"
                   onClick={() => {
-                    setAddedToWatchList(true);
                     props.addAndRemoveStorageFunc.add(
                       props.watchList,
                       props.addToWatchList,
@@ -59,7 +48,6 @@ const Card = (props) => {
                 <button
                   className="remove pointer"
                   onClick={() => {
-                    setAddedToWatchList(false);
                     props.addAndRemoveStorageFunc.remove(
                       props.watchList,
                       props.addToWatchList,
@@ -79,7 +67,6 @@ const Card = (props) => {
             <button
               className="pointer"
               onClick={() => {
-                setAddedToWatchList(true);
                 props.addAndRemoveStorageFunc.add(
                   props.watchList,
                   props.addToWatchList,

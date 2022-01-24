@@ -1,6 +1,6 @@
 import CardList from "../../Components/CardList/CardList";
-import "./homePage.scss";
 import Carousel from "../../Components/Carousel/Carousel";
+import "./homePage.scss";
 
 const HomePage = (props) => {
   return (

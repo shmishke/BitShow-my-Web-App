@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
 import { useEffect } from "react/cjs/react.development";
 import Card from "../Card/Card";
 import "./smallCardlist.scss";

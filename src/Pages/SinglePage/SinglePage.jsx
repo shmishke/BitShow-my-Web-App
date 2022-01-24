@@ -24,7 +24,6 @@ const SinglePage = (props) => {
       return 0;
     })
     .slice(0, 3);
-
   const mostRecentEpisodes = [...episodes]
     .sort((a, b) => {
       if (a.airdate > b.airdate) return -1;
@@ -36,8 +35,6 @@ const SinglePage = (props) => {
   const showCast = (par) => {
     return par.slice(0, numOfCast);
   };
-
-  const allGenresOfShow = show.genres;
 
   const showMoreShows = (arr) => {
     const genres = arr.map((e) => {

@@ -26,7 +26,6 @@ const Header = (props) => {
             setWidth={setWidth}
             disabled={isButtonClicked}
           />
-
           {searchValue && (
             <div className="search-list">
               {props.fetchResult.filter((e) =>

@@ -31,9 +31,6 @@ const DisplayShowInfo = (props) => {
   useEffect(() => {
     changeImageSlice(0);
     changeImageSliceEnd(4);
-    if (props.watchList && props.watchList.includes(Number(props.show.id))) {
-      setAddedOrHoveredBtn({ added: true, hovered: false });
-    } else setAddedOrHoveredBtn({ added: false, hovered: false });
 
     fetch(`http://api.tvmaze.com/shows/${props.show.id}/crew`)
       .then((res) => res.json())
@@ -54,7 +51,7 @@ const DisplayShowInfo = (props) => {
       setAddedOrHoveredBtn({ added: true, hovered: false });
     } else setAddedOrHoveredBtn({ added: false, hovered: false });
     toggleModal(false);
-  }, [props.watchList]);
+  }, [props.watchList, props.show.id]);
 
   if (episodes && seasons && cast && crew)
     return (
@@ -151,7 +148,7 @@ const DisplayShowInfo = (props) => {
           {seasons.length > 0 && episodes.length > 0 && (
             <div className="seasons-episodes">
               <h3>
-                {seasons.length == 1
+                {seasons.length === 1
                   ? "One season"
                   : `Seasons (${seasons.length})`}
               </h3>

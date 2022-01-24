@@ -11,8 +11,8 @@ const Footer = (props) => {
   const showsToDisplay = () => {
     const ids = JSON.parse(
       window.localStorage.getItem("recentlyViewed")
-    ).filter((e) => e != currentShow);
-    return ids.map((e) => props.fetchResult.find((el) => el.id == e));
+    ).filter((e) => Number(e) !== currentShow);
+    return ids.map((e) => props.fetchResult.find((el) => el.id === Number(e)));
   };
 
   return (

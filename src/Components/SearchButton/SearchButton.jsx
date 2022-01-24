@@ -1,6 +1,5 @@
-import { useState } from "react/cjs/react.development";
-import "./searchButton.scss";
 import { FaSearch } from "react-icons/fa";
+import "./searchButton.scss";
 
 const SearchButon = (props) => {
   return (

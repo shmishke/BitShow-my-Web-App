@@ -4,9 +4,8 @@ import "./watchListCard.scss";
 import { RiStarSLine } from "react-icons/ri";
 import { BsFillPlayFill } from "react-icons/bs";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { MdLocalMovies } from "react-icons/md";
+
 import { BsCameraReelsFill } from "react-icons/bs";
-import moment from "moment";
 
 const WatchListCard = (props) => {
   const [seasonsAndEpisodes, setSeasonsAndEpisodes] = useState([]);
@@ -20,7 +19,7 @@ const WatchListCard = (props) => {
     fetch(`http://api.tvmaze.com/shows/${props.show.id}/seasons`)
       .then((res) => res.json())
       .then((res) => setSeasonsAndEpisodes(res));
-  }, [props.watchList]);
+  }, [props.show.id]);
   return (
     <div className="watchlist-single-card">
       <div className="watchlist-img">
@@ -81,7 +80,6 @@ const WatchListCard = (props) => {
           <div>
             <Link to={`/show/${props.show.id}`}>
               <BsFillPlayFill
-                className="pointer"
                 className="pointer"
                 onClick={() => {
                   props.addAndRemoveStorageFunc.add(

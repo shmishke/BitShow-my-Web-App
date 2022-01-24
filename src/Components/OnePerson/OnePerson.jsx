@@ -12,8 +12,8 @@ const OnePerson = (props) => {
       <div className="single-person-img">
         {!characterImageClick ? (
           <>
-            {props.e.person.image != null &&
-            props.e.person.image != undefined ? (
+            {props.e.person.image !== null &&
+            props.e.person.image !== undefined ? (
               <img src={props.e.person.image.medium} alt="" />
             ) : (
               <img
@@ -24,13 +24,11 @@ const OnePerson = (props) => {
           </>
         ) : (
           <>
-            {props.e.character.image != null &&
-            props.e.character.image != undefined ? (
+            {props.e.character.image ? (
               <img src={props.e.character.image.medium} alt="" />
             ) : (
               <>
-                {props.e.person.image != null &&
-                props.e.person.image != undefined ? (
+                {props.e.person.image ? (
                   <img src={props.e.person.image.medium} alt="" />
                 ) : (
                   <img
