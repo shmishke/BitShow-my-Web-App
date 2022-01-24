@@ -5,12 +5,14 @@ import OnePerson from "../../Components/OnePerson/OnePerson";
 import SmallCardlist from "../../Components/SmallCardlist/SmallCardlist";
 import "./singlePage.scss";
 import DisplayShowInfo from "../../Components/DisplayShowInfo/DisplayShowInfo";
+import { HiInformationCircle } from "react-icons/hi";
 
 const SinglePage = (props) => {
   const [cast, setCast] = useState([]);
   const [episodes, setEpisodes] = useState([]);
   const [background, setBackground] = useState();
   const [numOfCast, changeNumOfCast] = useState(8);
+  const [infoHovered, setInfoHovered] = useState(false);
 
   const { id } = useParams();
   const show = props.fetchResult.find((e) => e.id === Number(id));
@@ -142,7 +144,25 @@ const SinglePage = (props) => {
           </div>
           {show.genres.length >= 1 && (
             <div className="more-by-genre">
-              <h3 className="title">Similar Shows</h3>
+              <div className="title">
+                <h3>Similar Shows</h3>
+                <div
+                  className="icons"
+                  onMouseEnter={() => setInfoHovered(true)}
+                  onMouseLeave={() => setInfoHovered(false)}
+                >
+                  <HiInformationCircle />
+                </div>
+                {infoHovered && (
+                  <div className="info">
+                    <p>
+                      Shows with same genre(s) as {show.name}. Shows you already
+                      visited are placed last.
+                    </p>
+                  </div>
+                )}
+              </div>
+
               <SmallCardlist
                 showsToDisplay={moreShows}
                 recentlyViewedShows={props.recentlyViewedShows}

@@ -9,7 +9,7 @@ import FilterPage from "./Pages/FilterPage/FilterPage";
 
 function App() {
   const [fetchResult, getFetchResult] = useState(false);
-  const [numberOfCardsDisplaying, changeNumberOfCardsDisplaying] = useState(10);
+  const [numberOfCardsDisplaying, changeNumberOfCardsDisplaying] = useState(30);
   const [activePage, changeActivePage] = useState(0);
   const [recentlyViewedShows, changeRecentlyViewedShows] = useState(
     JSON.parse(window.localStorage.getItem("recentlyViewed"))

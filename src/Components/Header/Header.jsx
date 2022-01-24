@@ -15,7 +15,7 @@ const Header = (props) => {
       <div className="header">
         <div className="logo pointer">
           <Link to="/">
-            <h1 onClick={props.changeActivePage(0)}>BitShow</h1>
+            <h1>BitShow</h1>
           </Link>
         </div>
         <div className="buttons">
