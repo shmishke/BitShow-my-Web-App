@@ -2,10 +2,9 @@ import { useEffect, useState } from "react/cjs/react.development";
 import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
 import "./cardList.scss";
-import { IoSearchCircle, IoSettingsSharp } from "react-icons/io5";
+import { IoSettingsSharp } from "react-icons/io5";
 import { AiFillCheckCircle } from "react-icons/ai";
 import variables from "../../variables.module.scss";
-import { useLocation } from "react-router-dom";
 import SearchButon from "../SearchButton/SearchButton";
 
 const CardList = (props) => {
@@ -131,7 +130,7 @@ const CardList = (props) => {
                     : props.numberOfCardsDisplaying
                 }
               ></input>
-              TV Shows per Page
+              Shows (max {props.fetchResult.length})
             </label>
             <button
               className="pointer"

@@ -20,7 +20,7 @@ const FilterPage = (props) => {
       <>
         <div className="top-of-filterpage">
           <h1>
-            Shows Filtered by <span>{genre}</span> ({showsToDisplay.length})
+            Shows Filtered by <span>{genre}</span>
           </h1>
         </div>
         <div className="cards">

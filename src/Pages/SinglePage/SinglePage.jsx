@@ -129,7 +129,7 @@ const SinglePage = (props) => {
                     </p>
                   </div>
                 ) : (
-                  <div className="show-more">
+                  <div className="show-more pointer">
                     <p onClick={() => changeNumOfCast(8)}>Hide all cast</p>
                   </div>
                 )
@@ -154,7 +154,7 @@ const SinglePage = (props) => {
                   <HiInformationCircle />
                 </div>
                 {infoHovered && (
-                  <div className="info">
+                  <div className="info pointer">
                     <p>
                       Shows with same genre(s) as {show.name}. Shows you already
                       visited are placed last.
