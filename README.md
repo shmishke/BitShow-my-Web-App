@@ -1,6 +1,7 @@
 # Project is LIVE!
 
-Hosted on Netlify. [https://elastic-kare-e81003.netlify.app](https://elastic-kare-e81003.netlify.app)
+Hosted on Netlify.
+[https://elastic-kare-e81003.netlify.app](https://elastic-kare-e81003.netlify.app)
 
 # Getting Started with Create React App
 
