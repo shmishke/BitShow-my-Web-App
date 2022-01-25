@@ -25,13 +25,13 @@ const CardList = (props) => {
 
   const sortBy = (name) => {
     const arr = sort.map((e) => e);
-    if ((name = "name"))
+    if (name === "name")
       return arr.sort((a, b) => {
         if (a.name < b.name) return -1;
         if (a.name > b.name) return 1;
         return 0;
       });
-    if ((name = "rating"))
+    if (name === "rating")
       return arr.sort((a, b) => {
         if (a.rating.average < b.rating.average) return -1;
         if (a.rating.average > b.rating.average) return 1;
@@ -115,19 +115,23 @@ const CardList = (props) => {
               Display
               <input
                 onChange={(e) => {
-                  const number = Number(e.target.value);
-                  if (number > props.fetchResult.length)
+                  let numberInput = Number(e.target.value);
+                  if (numberInput > props.fetchResult.length) {
                     e.target.value = props.fetchResult.length;
-                  else if (number < 0) e.target.value = 1;
-                  setCardsPerPage(Number(e.target.value));
+                  } else if (numberInput <= 0) {
+                    numberInput = 1;
+                  }
+                  setCardsPerPage(numberInput);
+                  props.changeActivePage(0);
                 }}
-                type="text"
+                type="number"
                 id="num-of-cards"
                 name="num-of-cards"
+                min={"0"}
                 placeholder={
                   props.fetchResult.length <= props.numberOfCardsDisplaying
                     ? props.fetchResult.length
-                    : props.numberOfCardsDisplaying
+                    : cardsPerPage
                 }
               ></input>
               Shows (max {props.fetchResult.length})
@@ -136,6 +140,7 @@ const CardList = (props) => {
               className="pointer"
               onClick={() => {
                 props.changeNumberOfCardsDisplaying(cardsPerPage);
+                changeSettingsIconClicked(!settingsIconClicked);
               }}
             >
               <AiFillCheckCircle />
@@ -159,7 +164,6 @@ const CardList = (props) => {
         )}
         <div className="search">
           <SearchButon
-            disabled={false}
             onChangeFunc={getSearchValue}
             setSearchValue={getSearchValue}
             width={width}

@@ -36,7 +36,7 @@ const Footer = (props) => {
         </div>
         <div className="footer-text">
           <h6>
-            <DiReact /> Milos Delic 2021 <DiJavascript1 />
+            <DiReact /> Milos Delic 2022 <DiJavascript1 />
           </h6>
           <div className="icons"></div>
         </div>

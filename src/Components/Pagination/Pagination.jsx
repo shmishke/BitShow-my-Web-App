@@ -71,21 +71,19 @@ const Pagination = (props) => {
                   props.changeActivePage(lastActivePage);
                 }}
               >
-                {Math.floor(
-                  props.fetchResult.length / props.numberOfCardsDisplaying
-                )}
+                {lastActivePage + 1}
               </button>
             </>
           )}
           <div className="no-hover ">
             <button
               className="pointer"
-              disabled={
-                props.numberOfCardsDisplaying * props.activePage +
-                  props.numberOfCardsDisplaying >=
-                props.fetchResult.length
-              }
+              disabled={props.activePage === lastActivePage}
               onClick={() => props.changeActivePage(props.activePage + 1)}
+              style={{
+                visibility:
+                  props.activePage === lastActivePage ? "hidden" : "visible",
+              }}
             >
               {">"}
             </button>
@@ -109,6 +107,9 @@ const Pagination = (props) => {
                   changeButton3(button3 - 1);
                 }
                 props.changeActivePage(props.activePage - 1);
+              }}
+              style={{
+                visibility: props.activePage === 0 ? "hidden" : "visible",
               }}
             >
               {"<"}
@@ -171,9 +172,7 @@ const Pagination = (props) => {
               props.changeActivePage(lastActivePage);
             }}
           >
-            {Math.floor(
-              props.fetchResult.length / props.numberOfCardsDisplaying
-            )}
+            {lastActivePage + 1}
           </button>
           <div className="no-hover">
             <button
@@ -184,6 +183,10 @@ const Pagination = (props) => {
                 changeButton2(button2 + 1);
                 changeButton3(button3 + 1);
                 props.changeActivePage(props.activePage + 1);
+              }}
+              style={{
+                visibility:
+                  props.activePage === lastActivePage ? "hidden" : "visible",
               }}
             >
               {">"}
@@ -203,6 +206,9 @@ const Pagination = (props) => {
                   changeButton3(lastActivePage - 2);
                 }
                 props.changeActivePage(props.activePage - 1);
+              }}
+              style={{
+                visibility: props.activePage === 0 ? "hidden" : "visible",
               }}
             >
               {"<"}
@@ -288,14 +294,13 @@ const Pagination = (props) => {
           <div className="no-hover">
             <button
               className="pointer"
-              style={
-                props.activePage === lastActivePage
-                  ? { visibility: "hidden" }
-                  : null
-              }
               disabled={props.activePage === lastActivePage}
               onClick={() => {
                 props.changeActivePage(props.activePage + 1);
+              }}
+              style={{
+                visibility:
+                  props.activePage === lastActivePage ? "hidden" : "visible",
               }}
             >
               {">"}

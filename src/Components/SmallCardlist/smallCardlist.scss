@@ -3,6 +3,7 @@
 .small-cardlist-search {
   background-color: transparent;
   border: 2px solid $mainColor;
+  margin: 0 auto;
   margin-bottom: 5rem;
   display: flex;
   justify-content: space-around;
@@ -14,5 +15,9 @@
     width: 60px;
     font-size: 2rem;
     align-self: center;
+  }
+  @media (max-width: 1600px) {
+    border: 0;
+    margin: 0 auto;
   }
 }

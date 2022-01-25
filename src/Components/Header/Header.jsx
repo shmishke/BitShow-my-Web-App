@@ -12,56 +12,56 @@ const Header = (props) => {
 
   return (
     <>
-      <div className="header">
+      <div className="header" onClick={() => props.changeActivePage(0)}>
         <div className="logo pointer">
           <Link to="/">
             <h1>BitShow</h1>
           </Link>
         </div>
         <div className="buttons">
-          <SearchButon
-            onChangeFunc={setSearchValue}
-            setSearchValue={setSearchValue}
-            width={width}
-            setWidth={setWidth}
-            disabled={isButtonClicked}
-          />
-          {searchValue && (
-            <div className="search-list">
-              {props.fetchResult.filter((e) =>
-                e.name.toLowerCase().includes(searchValue.toLowerCase())
-              ).length > 0 ? (
-                props.fetchResult
-                  .filter((e) =>
-                    e.name.toLowerCase().includes(searchValue.toLowerCase())
-                  )
-                  .slice(0, 10)
-                  .map((e, i) => (
-                    <div className="single-item" key={i}>
-                      <Link to={`/show/${e.id}`}>
-                        <h1
-                          onClick={() => {
-                            props.addAndRemoveStorageFunc.add(
-                              props.recentlyViewedShows,
-                              props.changeRecentlyViewedShows,
-                              e.id,
-                              "recentlyViewed"
-                            );
-                          }}
-                        >
-                          {e.name}
-                        </h1>
-                      </Link>
-                    </div>
-                  ))
-              ) : (
-                <div className="single-item">
-                  <h1>No results..</h1>
-                </div>
-              )}
-            </div>
-          )}
-
+          <div className="search-button-container">
+            <SearchButon
+              onChangeFunc={setSearchValue}
+              setSearchValue={setSearchValue}
+              width={width}
+              setWidth={setWidth}
+            />
+            {searchValue && (
+              <div className="search-list">
+                {props.fetchResult.filter((e) =>
+                  e.name.toLowerCase().includes(searchValue.toLowerCase())
+                ).length > 0 ? (
+                  props.fetchResult
+                    .filter((e) =>
+                      e.name.toLowerCase().includes(searchValue.toLowerCase())
+                    )
+                    .slice(0, 10)
+                    .map((e, i) => (
+                      <div className="single-item" key={i}>
+                        <Link to={`/show/${e.id}`}>
+                          <h1
+                            onClick={() => {
+                              props.addAndRemoveStorageFunc.add(
+                                props.recentlyViewedShows,
+                                props.changeRecentlyViewedShows,
+                                e.id,
+                                "recentlyViewed"
+                              );
+                            }}
+                          >
+                            {e.name}
+                          </h1>
+                        </Link>
+                      </div>
+                    ))
+                ) : (
+                  <div className="single-item">
+                    <h1>No results..</h1>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
           <div className="watchlist-btn">
             {isButtonClicked ? (
               <button

@@ -4,7 +4,6 @@ import "./watchListCard.scss";
 import { RiStarSLine } from "react-icons/ri";
 import { BsFillPlayFill } from "react-icons/bs";
 import { RiDeleteBin6Line } from "react-icons/ri";
-
 import { BsCameraReelsFill } from "react-icons/bs";
 
 const WatchListCard = (props) => {

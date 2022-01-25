@@ -21,7 +21,6 @@ const SearchButon = (props) => {
             props.setWidth(0);
           }
         }}
-        disabled={props.disabled}
       >
         <FaSearch />
       </button>

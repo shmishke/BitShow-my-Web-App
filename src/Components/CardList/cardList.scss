@@ -75,8 +75,11 @@
 .card-list {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-
   justify-items: center;
+
+  @media (max-width: 1600px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .bottom-of-page {

@@ -1,11 +1,19 @@
 import { IoHeart, IoHeartDislike } from "react-icons/io5";
+import { AiTwotoneStar } from "react-icons/ai";
+
 import { Link } from "react-router-dom";
 import "./card.scss";
+import { useState } from "react/cjs/react.development";
 
 const Card = (props) => {
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <>
-      <div className="card">
+      <div
+        className="card"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         <Link to={`/show/${props.show.id}`}>
           <div
             className="click-to"
@@ -91,6 +99,15 @@ const Card = (props) => {
             })}
           </div>
         </div>
+        {props.show.rating.average && isHovered && (
+          <div className="rating">
+            {" "}
+            <span>
+              <AiTwotoneStar />
+            </span>{" "}
+            {props.show.rating.average}
+          </div>
+        )}
       </div>
     </>
   );

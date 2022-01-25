@@ -6,14 +6,13 @@ const OnePerson = (props) => {
 
   useEffect(() => {
     setCharacterImageClick(false);
-  }, []);
+  }, [props.e]);
   return (
     <div className="single-person">
       <div className="single-person-img">
         {!characterImageClick ? (
           <>
-            {props.e.person.image !== null &&
-            props.e.person.image !== undefined ? (
+            {props.e.person.image && props.e.person.image ? (
               <img src={props.e.person.image.medium} alt="" />
             ) : (
               <img

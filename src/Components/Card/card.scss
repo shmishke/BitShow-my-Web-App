@@ -33,7 +33,10 @@
   }
 
   .rating {
-    background-color: red;
+    display: flex;
+    color: $textColor;
+    font-size: 1.2rem;
+    background-color: $mainColor;
     position: absolute;
     right: 0;
   }
@@ -77,6 +80,10 @@
       text-decoration: none;
       color: $textColor;
       flex-grow: 0;
+      :hover {
+        color: $mainColor;
+        background-color: $textColor;
+      }
     }
 
     p {
