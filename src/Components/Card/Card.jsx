@@ -3,7 +3,7 @@ import { AiTwotoneStar } from "react-icons/ai";
 
 import { Link } from "react-router-dom";
 import "./card.scss";
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 
 const Card = (props) => {
   const [isHovered, setIsHovered] = useState(false);
