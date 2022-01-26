@@ -49,7 +49,7 @@ const Card = (props) => {
                     );
                   }}
                 >
-                  Add to favorites
+                  Add to Watchlist
                   <div className="btn-icon">
                     <IoHeart />
                   </div>
@@ -66,7 +66,7 @@ const Card = (props) => {
                     );
                   }}
                 >
-                  Remove from Favorites{" "}
+                  Remove from Watchlist
                   <div className="btn-icon">
                     <IoHeartDislike />
                   </div>
