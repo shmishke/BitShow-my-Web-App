@@ -2,11 +2,19 @@
 
 .small-cardlist-search {
   background-color: transparent;
-  border: 2px solid $mainColor;
   margin: 0 auto;
   margin-bottom: 5rem;
   display: flex;
   justify-content: space-around;
+
+  .card {
+    width: 23%;
+
+    button {
+      font-size: 0.8rem;
+    }
+    font-size: 0.8rem;
+  }
 
   .btn-small-cardlist {
     height: 60px;
@@ -15,9 +23,5 @@
     width: 60px;
     font-size: 2rem;
     align-self: center;
-  }
-  @media (max-width: 1600px) {
-    border: 0;
-    margin: 0 auto;
   }
 }

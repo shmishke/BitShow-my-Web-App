@@ -18,11 +18,12 @@ const Footer = (props) => {
   return (
     <>
       <div className="footer">
-        <div className="footer-recently-viewed">
+        <div className="cardlist-similar">
           {props.recentlyViewedShows &&
             (props.recentlyViewedShows.length > 1 ? (
               <>
                 <h3>Recently Viewed</h3>
+
                 <SmallCardlist
                   showsToDisplay={showsToDisplay()}
                   recentlyViewedShows={props.recentlyViewedShows}

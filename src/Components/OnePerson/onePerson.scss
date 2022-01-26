@@ -10,6 +10,12 @@
     margin-left: 2rem;
     flex-grow: 0;
     flex-shrink: 1;
+    @media (max-width: 1600px) {
+      font-size: 1.1rem;
+    }
+    @media (max-width: 1280px) {
+      font-size: 1.1rem;
+    }
 
     p {
       color: rgb(184, 174, 174);
@@ -29,5 +35,12 @@
   .active {
     color: $orange;
     font-size: 1.5rem;
+
+    @media (max-width: 1600px) {
+      font-size: 1.5rem;
+    }
+    @media (max-width: 1280px) {
+      font-size: 1.3rem;
+    }
   }
 }

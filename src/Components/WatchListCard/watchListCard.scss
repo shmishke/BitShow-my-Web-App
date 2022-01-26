@@ -5,7 +5,7 @@
   border: 1px solid $textColor;
   color: $textColor;
   width: 100%;
-  margin-bottom: 1.3rem;
+  margin-bottom: 1.5rem;
   margin-top: 1rem;
 
   .watchlist-img {
@@ -13,6 +13,9 @@
     flex-shrink: 0;
     width: 23%;
     height: 12vh;
+    :last-child {
+      margin-bottom: 4rem;
+    }
 
     img {
       width: 100%;

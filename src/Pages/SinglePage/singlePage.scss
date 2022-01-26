@@ -6,10 +6,14 @@
 
   .top-of-single-page {
     background-color: $textColor;
-    height: calc(100vh - 47px - 65px);
+    height: calc(100vh - 65px);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+
+    @media (max-width: 1280px) {
+      height: calc(100vh - 57px);
+    }
   }
   .image-info {
     .show-name {
@@ -21,10 +25,21 @@
     font-size: 2.5rem;
     color: $mainColor;
     background-color: $textColor;
+
+    @media (max-width: 1280px) {
+      font-size: 2rem;
+    }
   }
 
   .main {
     padding: 0 12%;
+
+    @media (max-width: 1600px) {
+      padding: 0 6%;
+    }
+    @media (max-width: 1280px) {
+      padding: 0 1%;
+    }
 
     .more-by-genre {
       .title {
@@ -46,14 +61,23 @@
       }
     }
   }
-
+  .first {
+    margin-top: 2rem;
+  }
   .title {
     text-align: center;
     font-size: 2.3rem;
-    margin: 2rem 0;
+    margin-bottom: 2rem;
     flex-grow: 0;
     font-weight: 700;
     color: $mainColor;
+
+    @media (max-width: 1600px) {
+      font-size: 2rem;
+    }
+    @media (max-width: 1280px) {
+      font-size: 1.8rem;
+    }
   }
   .episodes {
     display: flex;
@@ -101,6 +125,13 @@
           0 60%,
           0 0
         );
+
+        @media (max-width: 1600px) {
+          font-size: 1.4rem;
+        }
+        @media (max-width: 1280px) {
+          font-size: 1.2rem;
+        }
       }
 
       .cast {
@@ -126,4 +157,8 @@
       }
     }
   }
+}
+.cardlist-similar {
+  width: 80%;
+  margin: 0 auto;
 }

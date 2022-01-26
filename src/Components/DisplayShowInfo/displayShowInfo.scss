@@ -28,7 +28,17 @@
     .top {
       display: flex;
       width: 100%;
-      justify-content: space-between;
+      flex-grow: 0;
+      @media (max-width: 1600px) {
+        font-size: 1rem;
+      }
+
+      @media (max-width: 1279px) {
+        font-size: 0.9rem;
+      }
+      @media (max-width: 1150px) {
+        font-size: 0.85rem;
+      }
 
       div {
         width: 100%;
@@ -70,7 +80,14 @@
     .images-container {
       width: 100%;
       flex-grow: 1;
-      margin: 1rem 0 1.5rem 0;
+      margin-top: 2rem;
+      @media (max-width: 1600px) {
+        font-size: 1rem;
+        margin: 0.5rem 0 0.75rem 0;
+      }
+      @media (max-width: 1280px) {
+        margin: 0.5rem 0 0.75rem 0;
+      }
 
       button {
         height: 50px;
@@ -93,17 +110,26 @@
 
         .single-image {
           width: 20%;
-          height: 150px;
         }
 
         img {
           width: 100%;
-          height: 100%;
+          height: 120%;
+
+          @media (max-width: 1600px) {
+            height: 100%;
+          }
+          @media (max-width: 1280px) {
+            height: 100%;
+          }
         }
       }
     }
     .show-name {
-      margin: 3rem;
+      flex-grow: 0;
+
+      margin: 2rem;
+
       a {
         text-decoration: none;
         :hover {
@@ -112,19 +138,29 @@
       }
     }
     .genres-container {
+      flex-grow: 0;
       display: flex;
       align-items: center;
-      padding: 10px 0 10px 0;
+      padding: 10px 0;
       border-top: 1px solid $textColor;
       border-bottom: 1px solid $textColor;
+      height: 10%;
 
       h3 {
         border-right: 1px solid $textColor;
         padding-right: 10%;
       }
+      @media (max-width: 1600px) {
+        font-size: 1rem;
+        padding: 0;
+      }
+      @media (max-width: 1280px) {
+        font-size: 0.9rem;
+      }
       .genres {
         display: flex;
         align-items: center;
+        flex-grow: 0;
         width: 100%;
         justify-content: space-around;
 
@@ -142,6 +178,9 @@
           padding: 5px 1rem;
           border-radius: 20px;
           border: 1px solid $textColor;
+          @media (max-width: 1280px) {
+            padding: 3px 0.6rem;
+          }
         }
       }
     }
@@ -151,7 +190,13 @@
       display: flex;
       flex-grow: 0;
       justify-content: space-evenly;
-      margin-top: 2rem;
+
+      @media (max-width: 1600px) {
+        font-size: 1rem;
+      }
+      @media (max-width: 1280px) {
+        font-size: 0.9rem;
+      }
     }
     .details {
       // padding-bottom: 1rem;
@@ -161,6 +206,14 @@
       padding-bottom: 1rem;
       margin-top: 0.5rem;
       padding-right: 0.3rem;
+
+      @media (max-width: 1600px) {
+        font-size: 1.05rem;
+      }
+
+      @media (max-width: 1280px) {
+        font-size: 0.9rem;
+      }
     }
     .stars-creator {
       display: flex;
@@ -168,11 +221,16 @@
       .stars,
       .creator {
         width: 50%;
-        // border: 1px solid red;
         padding-top: 0.7rem;
-        // border-right: 1px solid $textColor;
         text-align: center;
         height: 100%;
+        @media (max-width: 1600px) {
+          font-size: 1rem;
+          padding-top: 1px;
+        }
+        @media (max-width: 1280px) {
+          font-size: 0.9rem;
+        }
       }
       .stars {
         border-right: 1px solid $textColor;

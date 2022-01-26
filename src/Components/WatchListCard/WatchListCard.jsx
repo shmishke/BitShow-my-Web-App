@@ -53,7 +53,9 @@ const WatchListCard = (props) => {
           </div>
           <div className="watchlist-show-info">
             <div className="watchlist-show-genre">
-              {props.show.genres && genre === "Science-Fiction" ? "SF" : genre}
+              {props.show.genres && genre === "Science-Fiction"
+                ? "Sci-Fi"
+                : genre}
             </div>
             <div className="watchlist-show-date">
               <span>

@@ -10,8 +10,13 @@
   flex-direction: column;
   align-items: center;
 
-  .footer-recently-viewed {
-    width: 80%;
+  .cardlist-similar {
+    @media (min-width: 1600px) {
+      width: 65%;
+    }
+    @media (min-width: 1390px) {
+      width: 63%;
+    }
     .btn-small-cardlist {
       border: 1px solid $textColor;
     }

@@ -26,7 +26,9 @@ const Card = (props) => {
               );
             }}
           >
-            <img src={props.show.image.original} alt={props.show.name} />
+            <div className="image">
+              <img src={props.show.image.original} alt={props.show.name} />
+            </div>
             <div className="card-name">
               <div>{props.show.name}</div>
             </div>
@@ -93,7 +95,7 @@ const Card = (props) => {
             {props.show.genres.map((e, i) => {
               return (
                 <Link to={`/shows/${e}`} key={i}>
-                  <p>{e}</p>
+                  <p>{e === "Science-Fiction" ? "Sci-Fi" : e} </p>
                 </Link>
               );
             })}

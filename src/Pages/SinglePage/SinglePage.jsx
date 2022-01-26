@@ -83,7 +83,6 @@ const SinglePage = (props) => {
   if (episodes.length !== 0 && cast.length !== 0 && background)
     return (
       <div className="single-page-container">
-        <h2>{show.name} </h2>
         <div
           className="top-of-single-page"
           style={{
@@ -93,7 +92,7 @@ const SinglePage = (props) => {
             backgroundSize: "cover",
           }}
         >
-          .
+          <h2>{show.name} </h2>
           <DisplayShowInfo
             show={show}
             watchList={props.watchList}
@@ -103,7 +102,7 @@ const SinglePage = (props) => {
           />
         </div>
         <div className="main">
-          <h3 className="title">Best Rated episodes</h3>
+          <h3 className="title first">Best Rated episodes</h3>
           <div className="episodes">
             {bestRatedEpisodes.slice(0, 3).map((e, i) => (
               <OneEpisode e={e} details={props.details} key={i} />
@@ -159,15 +158,16 @@ const SinglePage = (props) => {
                   </div>
                 )}
               </div>
-
-              <SmallCardlist
-                showsToDisplay={moreShows}
-                recentlyViewedShows={props.recentlyViewedShows}
-                changeRecentlyViewedShows={props.changeRecentlyViewedShows}
-                watchList={props.watchList}
-                addToWatchList={props.addToWatchList}
-                addAndRemoveStorageFunc={props.addAndRemoveStorageFunc}
-              />
+              <div className="cardlist-similar">
+                <SmallCardlist
+                  showsToDisplay={moreShows}
+                  recentlyViewedShows={props.recentlyViewedShows}
+                  changeRecentlyViewedShows={props.changeRecentlyViewedShows}
+                  watchList={props.watchList}
+                  addToWatchList={props.addToWatchList}
+                  addAndRemoveStorageFunc={props.addAndRemoveStorageFunc}
+                />
+              </div>
             </div>
           )}
         </div>

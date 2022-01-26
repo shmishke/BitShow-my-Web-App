@@ -144,24 +144,6 @@ const DisplayShowInfo = (props) => {
               <h1>{props.show.name}</h1>
             </Link>
           </div>
-          {seasons.length > 0 && episodes.length > 0 && (
-            <div className="seasons-episodes">
-              <h3>
-                {seasons.length === 1
-                  ? "One season"
-                  : `Seasons (${seasons.length})`}
-              </h3>
-              <span> {"</>"} </span>
-              <h3>
-                Episodes (
-                {seasons.reduce((acc, e) => {
-                  const all = acc + Number(e.episodeOrder);
-                  return all;
-                }, 0)}
-                )
-              </h3>
-            </div>
-          )}
 
           {episodes[0].image && (
             <div className="images-container">
@@ -211,6 +193,25 @@ const DisplayShowInfo = (props) => {
               </div>
             </div>
           )}
+          {seasons.length > 0 && episodes.length > 0 && (
+            <div className="seasons-episodes">
+              <h3>
+                {seasons.length === 1
+                  ? "One season"
+                  : `Seasons (${seasons.length})`}
+              </h3>
+              <span> {"</>"} </span>
+              <h3>
+                Episodes (
+                {seasons.reduce((acc, e) => {
+                  const all = acc + Number(e.episodeOrder);
+                  return all;
+                }, 0)}
+                )
+              </h3>
+            </div>
+          )}
+
           <h3>Show Details</h3>
           <div className="details">
             <p>{props.details(props.show)}</p>
@@ -234,9 +235,7 @@ const DisplayShowInfo = (props) => {
           <div className="stars-creator">
             <div className="stars">
               {cast.length > 1 ? (
-                <h3>
-                  Starring: {cast[0].person.name} / {cast[1].person.name}
-                </h3>
+                <h3>Starring: {cast[0].person.name}</h3>
               ) : (
                 <h3>Starring: {cast[0].person.name}</h3>
               )}

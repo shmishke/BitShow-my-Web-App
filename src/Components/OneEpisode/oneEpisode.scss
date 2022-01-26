@@ -23,6 +23,13 @@
     -webkit-clip-path: polygon(0 0, 101% 0, 100% 100%, 10% 100%);
     clip-path: polygon(0 0, 101% 0, 100% 100%, 10% 100%);
     margin-bottom: -10px;
+
+    @media (max-width: 1600px) {
+      font-size: 0.9rem;
+    }
+    @media (max-width: 1280px) {
+      font-size: 0.8rem;
+    }
   }
   .episode-top {
     font-size: 1.3rem;
@@ -39,10 +46,18 @@
     padding: 0 0.5rem;
     justify-content: space-between;
     margin-bottom: -2px;
+    @media (max-width: 1600px) {
+      font-size: 1.1rem;
+    }
+    @media (max-width: 1280px) {
+      font-size: 1rem;
+    }
 
     .episode-rating {
       display: flex;
       align-items: center;
+
+      font-size: 1.3rem;
     }
   }
 
@@ -52,13 +67,24 @@
     h3 {
       padding: 0.8rem 0 0.5rem 0;
       color: $orange;
+      @media (max-width: 1600px) {
+        font-size: 1.1rem;
+      }
+      @media (max-width: 1280px) {
+        font-size: 1rem;
+      }
+    }
+    @media (max-width: 1600px) {
+      font-size: 1rem;
+    }
+    @media (max-width: 1280px) {
+      font-size: 0.9rem;
     }
   }
 
   .episode-bottom {
     margin: 1rem 0 10px 0;
     height: 30px;
-    font-size: 1.2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -70,6 +96,13 @@
       display: flex;
       align-items: center;
       font-size: 1rem;
+
+      @media (max-width: 1600px) {
+        font-size: 0.9rem;
+      }
+      @media (max-width: 1280px) {
+        font-size: 0.8rem;
+      }
     }
   }
 }

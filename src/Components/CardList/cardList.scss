@@ -77,9 +77,15 @@
   grid-template-columns: repeat(5, 1fr);
   justify-items: center;
 
-  @media (max-width: 1600px) {
+  @media (max-width: 1550px) {
     grid-template-columns: repeat(4, 1fr);
   }
+  @media (max-width: 1175px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  // @media (max-width: 1039px) {
+  //   grid-template-columns: repeat(2, 1fr);
+  // }
 }
 
 .bottom-of-page {
