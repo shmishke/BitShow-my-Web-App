@@ -33,6 +33,7 @@ const WatchListComponent = (props) => {
         </div>
         <div className="btn-container">
           <button
+            className="pointer"
             onClick={() => {
               props.changeIsButtonClicked(false);
             }}

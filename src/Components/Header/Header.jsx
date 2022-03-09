@@ -105,7 +105,7 @@ const Header = (props) => {
           </div>
 
           <div
-            className="watchlist-btn "
+            className="watchlist-btn"
             style={{ width: isButtonClicked ? "25vw" : 0 }}
           >
             <WatchListComponent

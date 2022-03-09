@@ -8,7 +8,7 @@ const Pagination = (props) => {
 
   const lastActivePage =
     props.fetchResult.length % props.numberOfCardsDisplaying === 0
-      ? Math.floor(props.fetchResult.length / props.numberOfCardsDisplaying) - 1
+      ? props.fetchResult.length / props.numberOfCardsDisplaying - 1
       : Math.floor(props.fetchResult.length / props.numberOfCardsDisplaying);
 
   return (

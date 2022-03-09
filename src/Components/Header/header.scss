@@ -10,6 +10,7 @@
   align-items: center;
   flex-grow: 0;
   flex-shrink: 0;
+
   .logo {
     margin-left: 2%;
     a {
@@ -25,7 +26,7 @@
 
     .watchlist-btn {
       flex-grow: 0;
-      transition: width 1s ease-out;
+      transition: width 0.5s ease-out;
     }
     .eye-btn {
       margin-right: 2rem;
@@ -56,10 +57,7 @@
         padding: 0 10px;
       }
     }
-    // .search-buttons {
-    //   position: relative;
-    //   display: inline-block;
-    // }.
+
     .search-button-container {
       position: relative;
 

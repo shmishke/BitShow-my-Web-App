@@ -17,7 +17,12 @@ function App() {
   const [watchList, addToWatchList] = useState(
     JSON.parse(window.localStorage.getItem("watchList"))
   );
-  const [addAndRemoveStorageFunc, setAddAndRemoveStorageFunc] = useState({});
+
+  useEffect(() => {
+    fetch(`http://api.tvmaze.com/shows`)
+      .then((res) => res.json())
+      .then((res) => getFetchResult(res));
+  }, []);
 
   const details = (det) => {
     return det.summary
@@ -63,16 +68,10 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    fetch(`http://api.tvmaze.com/shows`)
-      .then((res) => res.json())
-      .then((res) => getFetchResult(res));
-
-    setAddAndRemoveStorageFunc({
-      add: addToStorage,
-      remove: removeFromStorage,
-    });
-  }, []);
+  const addAndRemoveStorageFunc = {
+    add: addToStorage,
+    remove: removeFromStorage,
+  };
 
   return (
     <Router>
